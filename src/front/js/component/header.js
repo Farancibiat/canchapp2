@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../styles/header.css";
 
@@ -73,9 +74,11 @@ export const Header = () => {
 									</select>
 								</div>
 								<div className="col-2 px-0">
-									<button type="submit" id="reservePage" className="btn btn-success my-0">
-										Reservar
-									</button>
+									<Link to="/reserve/">
+										<button type="submit" id="reservePage" className="btn btn-success my-0">
+											Reservar
+										</button>
+									</Link>
 								</div>
 								<div className="col-1" />
 							</div>
