@@ -25,46 +25,44 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="d-flex flex-column h-100">
-			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<Navbar />
-					<Switch>
-						<Route exact path="/checkout">
-							<CheckOut />
-						</Route>
-						<Route exact path="/complex/:theId">
-							<Complex id="theId" />
-						</Route>
-						<Route exact path="/contact">
-							<Contact />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/login">
-							<Login />
-						</Route>
-						<Route exact path="/profile/:userID">
-							<Profile id="userID" />
-						</Route>
-						<Route exact path="/recover">
-							<Recover />
-						</Route>
-						<Route exact path="/reserve">
-							<Reserve />
-						</Route>
-						<Route>
-							<NotFound />
-						</Route>
-					</Switch>
-					<Footer />
-				</ScrollToTop>
-			</BrowserRouter>
-		</div>
+		<BrowserRouter basename={basename}>
+			<ScrollToTop>
+				<Navbar />
+				<Switch>
+					<Route exact path="/checkout">
+						<CheckOut />
+					</Route>
+					<Route exact path="/complex/:theId">
+						<Complex id="theId" />
+					</Route>
+					<Route exact path="/contact">
+						<Contact />
+					</Route>
+					<Route exact path="/demo">
+						<Demo />
+					</Route>
+					<Route exact path="/">
+						<Home />
+					</Route>
+					<Route exact path="/login">
+						<Login />
+					</Route>
+					<Route exact path="/profile/:userID">
+						<Profile id="userID" />
+					</Route>
+					<Route exact path="/recover">
+						<Recover />
+					</Route>
+					<Route exact path="/reserve">
+						<Reserve />
+					</Route>
+					<Route>
+						<NotFound />
+					</Route>
+				</Switch>
+				<Footer />
+			</ScrollToTop>
+		</BrowserRouter>
 	);
 };
 

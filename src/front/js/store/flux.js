@@ -85,7 +85,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				},
 				{
 					name: "Metropolitana",
-					communes: ["Santiago", "Maipú", "Renca"],
+					communes: ["Santiago", "Maipú", "Renca", "San Joaquin"],
 					complex: [
 						{
 							name: "-",
