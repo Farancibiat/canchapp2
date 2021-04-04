@@ -8,9 +8,9 @@ export const Navbar = () => {
 		<>
 			<nav className="navbar navbar-expand-lg navbar-light">
 				<div className="container-fluid">
-					<a className="navbar-brand" href="#">
+					<Link className="navbar-brand" to="/">
 						<img src={logo} alt="" width="150" />
-					</a>
+					</Link>
 					<button
 						className="navbar-toggler"
 						type="button"
@@ -24,7 +24,7 @@ export const Navbar = () => {
 					<div className="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 							<button type="button" className="btn btn-primary">
-								<Link to="/home">Home</Link>
+								<Link to="/">Home</Link>
 							</button>
 							<button type="button" className="btn btn-info">
 								<Link to="/login">Login</Link>
