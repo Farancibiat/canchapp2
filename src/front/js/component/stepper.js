@@ -1,6 +1,6 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import "../styles/home.css";
+
 import Picture from "/workspace/canchapp2/src/front/img/vectorstock_8229541.png";
 import Step1 from "/workspace/canchapp2/src/front/img/step1.jpg";
 import Step2 from "/workspace/canchapp2/src/front/img/step2.jpg";

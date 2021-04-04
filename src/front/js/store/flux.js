@@ -22,99 +22,176 @@ const getState = ({ getStore, getActions, setStore }) => {
 				unavailable: []
 			},
 
-			searchEng: {
-				regions: [
-					{
-						name: "Arica y Parinacota",
-						communes: ["Arica"],
-						complex: []
-					},
-					{
-						name: "Tarapacá",
-						communes: ["Iquique"],
-						complex: []
-					},
-					{
-						name: "Antofagasta",
-						communes: ["Antofagasta"],
-						complex: []
-					},
-					{
-						name: "Atacama",
-						communes: ["Copiapó"],
-						complex: []
-					},
-					{
-						name: "Coquimbo",
-						communes: ["La Serena"],
-						complex: []
-					},
-					{
-						name: "Valparaiso",
-						communes: ["Valparaiso"],
-						complex: []
-					},
-					{
-						name: "Metropolitana",
-						communes: ["Santiago", "Maipú"],
-						complex: []
-					},
-					{
-						name: "Libertador General Bernardo O'Higgins",
-						communes: ["Rancagua"],
-						complex: []
-					},
-					{
-						name: "Maule",
-						communes: ["Talca"],
-						complex: []
-					},
-					{
-						name: "Ñuble",
-						communes: ["Chillán"],
-						complex: []
-					},
-					{
-						name: "Biobío",
-						communes: ["Concepción"],
-						complex: []
-					},
-					{
-						name: "La Araucanía",
-						communes: ["Temuco"],
-						complex: []
-					},
-					{
-						name: "Los Ríos",
-						communes: ["Valdivia"],
-						complex: []
-					},
-					{
-						name: "Los Lagos",
-						communes: ["Puerto Montt", "Castro"],
-						complex: [
-							{
-								name: "Donde Manolo",
-								id: "1"
-							},
-							{
-								name: "Sport 7",
-								id: "1"
-							}
-						]
-					},
-					{
-						name: "Aysén del General Carlos Ibáñez del Campo",
-						communes: ["Coyhaique"],
-						complex: []
-					},
-					{
-						name: "Magallanes y la Antártica Chilena",
-						communes: ["Punta Arenas"],
-						complex: []
-					}
-				]
-			}
+			searchEng: [
+				{
+					name: "Arica y Parinacota",
+					communes: ["Arica"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Tarapacá",
+					communes: ["Iquique"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Antofagasta",
+					communes: ["Antofagasta"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Atacama",
+					communes: ["Copiapó"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Coquimbo",
+					communes: ["La Serena"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Valparaiso",
+					communes: ["Valparaiso"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Metropolitana",
+					communes: ["Santiago", "Maipú", "Renca"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Libertador General Bernardo O'Higgins",
+					communes: ["Rancagua"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Maule",
+					communes: ["Talca"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Ñuble",
+					communes: ["Chillán"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Biobío",
+					communes: ["Concepción"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "La Araucanía",
+					communes: ["Temuco"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Los Ríos",
+					communes: ["Valdivia"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Los Lagos",
+					communes: ["Puerto Montt", "Castro"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						},
+						{
+							name: "Donde Manolo",
+							id: "1"
+						},
+						{
+							name: "Sport 7",
+							id: "2"
+						}
+					]
+				},
+				{
+					name: "Aysén del General Carlos Ibáñez del Campo",
+					communes: ["Coyhaique"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				},
+				{
+					name: "Magallanes y la Antártica Chilena",
+					communes: ["Punta Arenas"],
+					complex: [
+						{
+							name: "-",
+							id: "-"
+						}
+					]
+				}
+			]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
