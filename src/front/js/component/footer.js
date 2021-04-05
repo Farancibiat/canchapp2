@@ -32,7 +32,7 @@ export const Footer = () => {
 					</section>
 				</div>
 
-				<div className="text-center text-white p-3">© 2021 Copyright: Pichangapp</div>
+				<div className="text-center text-dark p-3">© 2021 Copyright: Pichangapp</div>
 			</footer>
 		</footer>
 	);
