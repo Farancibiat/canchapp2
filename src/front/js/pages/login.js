@@ -13,17 +13,6 @@ export const Login = () => {
 					<div className="card-login">
 						<div className="card-header">
 							<h3>Sign In</h3>
-							{/* <div className="d-flex justify-content-end social_icon">
-								<span>
-									<i className="fab fa-facebook-square" />
-								</span>
-								<span>
-									<i className="fab fa-instagram" />
-								</span>
-								<span>
-									<i className="fab fa-twitter-square" />
-								</span>
-							</div> */}
 						</div>
 						<div className="card-body">
 							<form>
@@ -48,14 +37,16 @@ export const Login = () => {
 									Remember Me
 								</div>
 								<div className="form-group">
-									<input type="submit" value="Login" className="btn float-right login_btn" />
+									<input
+										type="submit"
+										value="Login"
+										className="btn float-right btn-warning login-btn"
+									/>
 								</div>
 							</form>
 						</div>
 						<div className="card-footer">
-							<div className="d-flex justify-content-center links">
-								{/* <Link to="#">Don't have an account?</Link> */}
-							</div>
+							<div className="d-flex justify-content-center links" />
 							<div className="d-flex justify-content-center">
 								<Link to="#">Olvidaste tu contraseña?</Link>
 							</div>
