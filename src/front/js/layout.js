@@ -15,7 +15,7 @@ import { Reserve } from "./pages/reserve";
 
 import injectContext from "./store/appContext";
 
-import { Navbar } from "./component/navbar";
+import { NavigationBar } from "./component/navigationbar";
 import { Footer } from "./component/footer";
 
 //create your first component
@@ -27,7 +27,7 @@ const Layout = () => {
 	return (
 		<BrowserRouter basename={basename}>
 			<ScrollToTop>
-				<Navbar />
+				<NavigationBar />
 				<Switch>
 					<Route exact path="/checkout">
 						<CheckOut />
