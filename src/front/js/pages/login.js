@@ -22,7 +22,7 @@ export const Login = () => {
 											<i className="fas fa-user" />
 										</span>
 									</div>
-									<input type="text" className="form-control" placeholder="username" />
+									<input type="text" className="form-control" placeholder="Nombre de Usuario" />
 								</div>
 								<div className="input-group form-group">
 									<div className="input-group-prepend">
@@ -30,7 +30,7 @@ export const Login = () => {
 											<i className="fas fa-key" />
 										</span>
 									</div>
-									<input type="password" className="form-control" placeholder="password" />
+									<input type="password" className="form-control" placeholder="Contraseña" />
 								</div>
 								<div className="row align-items-center remember">
 									<input type="checkbox" />
