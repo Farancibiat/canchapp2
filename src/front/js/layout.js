@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { CheckOut } from "./pages/checkout";
-import { Complex } from "./pages/complex";
+import { Account } from "./pages/account";
 import { Contact } from "./pages/contact";
 import { Demo } from "./pages/demo";
 import { Home } from "./pages/home";
@@ -32,8 +32,8 @@ const Layout = () => {
 					<Route exact path="/checkout">
 						<CheckOut />
 					</Route>
-					<Route exact path="/complex/:theId">
-						<Complex id="theId" />
+					<Route exact path="/account">
+						<Account />
 					</Route>
 					<Route exact path="/contact">
 						<Contact />
