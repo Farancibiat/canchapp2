@@ -5,7 +5,8 @@ footer{
 }
 
 .btn-face, .btn-twitter, .btn-insta{
-    background-color:#26A514 ;
+    background-color:#007bff ;
     width: 4rem;
+    border-radius: 50px;
 }
 
