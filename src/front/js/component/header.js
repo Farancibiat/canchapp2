@@ -6,18 +6,29 @@ import "../styles/header.css";
 export const Header = () => {
 	const { store, actions } = useContext(Context);
 	const [comunas, setComunas] = useState(["-"]);
+	const [region, setRegion] = useState("Región");
 	const [complex, setComplex] = useState(["-"]);
 
 	function change_commune(event) {
-		const selRegion = event.target.value;
-		if (selRegion != "Región") {
-			setComunas(store.searchEng[selRegion].communes);
+		const aux = event.target.value;
+		if (aux != "Región") {
+			setComunas(
+				store.searchEng[aux].communes.map(element => {
+					setRegion(event.target.value);
+					return element.name;
+				})
+			);
 		}
+		console.log(region);
 	}
 	function change_complex(event) {
 		const selComuna = event.target.value;
 		if (selComuna != "Comuna") {
-			setComplex(store.searchEng[selComuna].communes);
+			setComplex(
+				store.searchEng[region].communes[selComuna].complex.map(complexs => {
+					return complexs.name;
+				})
+			);
 		}
 	}
 	return (
@@ -50,11 +61,11 @@ export const Header = () => {
 										id="selectComuna"
 										onChange={e => change_complex(e)}>
 										<option selected>Comuna</option>
-										{// Renderizado de regiones en Store
+										{// Renderizado de comunas desde Store
 										comunas.map((commune, index) => {
 											return (
 												<option key={index} value={index}>
-													{commune}
+													{commune.name}
 												</option>
 											);
 										})}

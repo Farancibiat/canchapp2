@@ -25,169 +25,269 @@ const getState = ({ getStore, getActions, setStore }) => {
 			searchEng: [
 				{
 					name: "Arica y Parinacota",
-					communes: ["Arica"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Arica",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Tarapacá",
-					communes: ["Iquique"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Iquique",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Antofagasta",
-					communes: ["Antofagasta"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Antofagasta",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Atacama",
-					communes: ["Copiapó"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Copiapó",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Coquimbo",
-					communes: ["La Serena"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "La Serena",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Valparaiso",
-					communes: ["Valparaiso"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Valparaiso",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Metropolitana",
-					communes: ["Santiago", "Maipú", "Renca", "San Joaquin"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Santiago",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
+						},
+						{
+							name: "Maipú",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
+						},
+						{
+							name: "Renca",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
+						},
+						{
+							name: "San Joaquín",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Libertador General Bernardo O'Higgins",
-					communes: ["Rancagua"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Rancagua",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Maule",
-					communes: ["Talca"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Talca",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Ñuble",
-					communes: ["Chillán"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Chillán",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Biobío",
-					communes: ["Concepción"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Concepción",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "La Araucanía",
-					communes: ["Temuco"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Temuco",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Los Ríos",
-					communes: ["Valdivia"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Valdivia",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Los Lagos",
-					communes: ["Puerto Montt", "Castro"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Puerto Montt",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						},
 						{
-							name: "Donde Manolo",
-							id: "1"
-						},
-						{
-							name: "Sport 7",
-							id: "2"
+							name: "Castro",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								},
+								{
+									name: "Donde Manolo",
+									id: "1"
+								},
+								{
+									name: "Sport 7",
+									id: "2"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Aysén del General Carlos Ibáñez del Campo",
-					communes: ["Coyhaique"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Coyhaique",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				},
 				{
 					name: "Magallanes y la Antártica Chilena",
-					communes: ["Punta Arenas"],
-					complex: [
+					communes: [
 						{
-							name: "-",
-							id: "-"
+							name: "Punta Arenas",
+							complex: [
+								{
+									name: "-",
+									id: "-"
+								}
+							]
 						}
 					]
 				}
