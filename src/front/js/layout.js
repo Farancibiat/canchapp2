@@ -53,7 +53,7 @@ const Layout = () => {
 					<Route exact path="/recover">
 						<Recover />
 					</Route>
-					<Route exact path="/reserve">
+					<Route exact path="/reserve/:theId">
 						<Reserve />
 					</Route>
 					<Route>
