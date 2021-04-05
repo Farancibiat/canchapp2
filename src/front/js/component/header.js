@@ -7,6 +7,7 @@ export const Header = () => {
 	const { store, actions } = useContext(Context);
 	const [comunas, setComunas] = useState(["-"]);
 	const [complex, setComplex] = useState(["-"]);
+	const [url, setUrl] = useState("");
 
 	function change_commune(event) {
 		const selRegion = event.target.value;
@@ -16,8 +17,18 @@ export const Header = () => {
 	}
 	function change_complex(event) {
 		const selComuna = event.target.value;
-		if (selComuna != "Comuna") {
-			setComplex(store.searchEng[selComuna].communes);
+		if (selComuna == "Comuna") {
+			setComplex(["Comuna"]);
+		} else if (selComuna == "Castro") {
+			setComplex(["Donde Manolo", "Sport 7", "Municipal 2"]);
+		}
+	}
+	function change_url(e) {
+		const aux = window.location.pathname.split("/");
+		if (aux[1] == "reserve") {
+			setUrl(`${e.target.value}`);
+		} else {
+			setUrl(`reserve/${e.target.value}`);
 		}
 	}
 	return (
@@ -53,7 +64,7 @@ export const Header = () => {
 										{// Renderizado de regiones en Store
 										comunas.map((commune, index) => {
 											return (
-												<option key={index} value={index}>
+												<option key={index} value={commune}>
 													{commune}
 												</option>
 											);
@@ -61,20 +72,20 @@ export const Header = () => {
 									</select>
 								</div>
 								<div className="col-2 px-1">
-									<select className="custom-select" id="selectCancha">
+									<select className="custom-select" id="selectCancha" onChange={e => change_url(e)}>
 										<option selected>Cancha</option>
 										{// Renderizado de regiones en Store
-										complex.map((commplex, index) => {
+										complex.map((complexName, index) => {
 											return (
 												<option key={index} value={index}>
-													{complex}
+													{complexName}
 												</option>
 											);
 										})}
 									</select>
 								</div>
 								<div className="col-2 px-0">
-									<Link to="/reserve/">
+									<Link to={`${url}`}>
 										<button type="submit" id="reservePage" className="btn btn-success my-0">
 											Reservar
 										</button>
