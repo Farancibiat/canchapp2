@@ -5,7 +5,7 @@ import logo from "/workspace/canchapp2/src/front/img/logo_navbar.png";
 
 export const Footer = () => {
 	return (
-		<footer className="text-center text-white">
+		<footer className="text-center text-white bg-warning">
 			<div className="row">
 				<div className="contact-footer text-dark col-4">
 					<p>Contáctanos</p>

@@ -195,6 +195,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			cerrarSesion: () => {
+				setStore({ loginStatus: true });
+			},
 
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

@@ -38,7 +38,6 @@ export const Login = () => {
 								</div>
 								<div className=" form-group">
 									<input type="submit" value="Login" className="btn float-right login_btn" />
-
 								</div>
 							</form>
 						</div>

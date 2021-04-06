@@ -8,13 +8,15 @@
 }
 
 .fondo-account{
-    /* background-image: url(../../img/fondo_login.png); */
-    
+    background-image: url(../../img/fondo_cancha.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     min-height: 630px;
 }
 
 .card-account{
-    
+    background: transparent;
+
     padding-top: 3rem;
     padding-bottom: 8rem;
 }
