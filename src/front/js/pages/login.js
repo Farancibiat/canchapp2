@@ -10,7 +10,7 @@ export const Login = () => {
 		<div className="fondo-login justify-content-center">
 			<div className="con1">
 				<div className="d-flex justify-content-center h-100">
-					<div className="card-login">
+					<div className="card-login rounded-lg">
 						<div className="card-header">
 							<h3>Sign In</h3>
 						</div>
@@ -36,12 +36,9 @@ export const Login = () => {
 									<input type="checkbox" />
 									Remember Me
 								</div>
-								<div className="form-group">
-									<input
-										type="submit"
-										value="Login"
-										className="btn float-right btn-warning login-btn"
-									/>
+								<div className=" form-group">
+									<input type="submit" value="Login" className="btn float-right login_btn" />
+
 								</div>
 							</form>
 						</div>

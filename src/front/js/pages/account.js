@@ -9,14 +9,14 @@ export const Account = props => {
 
 	return (
 		<div className="fondo-account">
-			<div className="card-account card bg-light">
-				<article className="account-style card-body mx-auto">
+			<div className="card-account card ">
+				<article className="account-style card-body mx-auto rounded-lg">
 					<h4 className="card-title mt-3 text-center">Crea Tu Cuenta</h4>
 					<p className="text-center" />
 					{/* <p>
 						<a href="" className="btn btn-block btn-twitter">
 							{" "}
-							<i className="fab fa-twitter" />   Login via Twitter
+							<i className="fab fa-twitter" />Login via Twitter
 						</a>
 						<a href="" className="btn btn-block btn-facebook">
 							{" "}
@@ -24,7 +24,7 @@ export const Account = props => {
 						</a>
 					</p> */}
 					<p className="divider-text">
-						<span className="bg-light">Aquí</span>
+						<span className="bg-transparent" />
 					</p>
 					<form>
 						<div className="form-group input-group">
