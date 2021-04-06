@@ -1,22 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
-/* html,body{
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
-} */
 
 .fondo-login{
-    /* background-image: url(../../img/fondo_login.png); */
-    /* background-size: cover; */
-    /* height: max-content; 
-     width: max-content; 
-    height: max-content; */
-    
     min-height: 630px;
- 
-    
     background-repeat: no-repeat;
     background-size: cover;
     
@@ -93,10 +79,8 @@ color: black;
 background-color: #007bff;
 width: 100px;
 }
-
-.login_btn:hover{
-color: black;
-background-color: white;
+.login-btn{
+    color:black !important;
 }
 
 .links{
