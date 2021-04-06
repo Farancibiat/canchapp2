@@ -8,11 +8,12 @@ font-family: 'Numans', sans-serif;
 } */
 
 .fondo-login{
-    background-image: url(../../img/fondo_login.png);
+    /* background-image: url(../../img/fondo_login.png); */
     /* background-size: cover; */
     /* height: max-content; 
      width: max-content; 
     height: max-content; */
+    
     min-height: 630px;
  
     
@@ -26,12 +27,15 @@ align-content: center;
 
 }
 
+
+
 .card-login{
 height: 370px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+/* background-color: rgba(0,0,0,0.5) !important; */
+background-color:  #26a514;
 }
 
 .social_icon span{
@@ -81,9 +85,12 @@ margin-left: 15px;
 margin-right: 5px;
 }
 
+
+
 .login_btn{
+
 color: black;
-background-color: #FFC312;
+background-color: #007bff;
 width: 100px;
 }
 

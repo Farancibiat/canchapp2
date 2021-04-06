@@ -1,5 +1,6 @@
 .account-style{
     max-width: 400px;
+    background-color: #26a514;
 }
 
 .account-style2{
@@ -8,11 +9,12 @@
 
 .fondo-account{
     /* background-image: url(../../img/fondo_login.png); */
-    background-color: #405D9D;
+    
     min-height: 630px;
 }
 
 .card-account{
+    
     padding-top: 3rem;
     padding-bottom: 8rem;
 }
