@@ -2,6 +2,7 @@
 
 
 .fondo-login{
+    background-image: url(../../img/fondo_cancha.jpg);
     min-height: 630px;
     background-repeat: no-repeat;
     background-size: cover;
