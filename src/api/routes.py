@@ -15,6 +15,7 @@ def create_user():
         password = request.json.get("password", None)
         name = request.json.get("name", None)
         lastname = request.json.get("lastname", None)
+        phone = request.json.get("phone", None)
 
         if not email:
             return "Email requerido", 401
@@ -24,6 +25,8 @@ def create_user():
             return "Nombre requerido", 401
         if not lastname:
             return "Apellido requerido", 401
+        if not phone:
+            return "Telefono requerido", 401    
 
         email_query = User.query.filter_by(email=email).first()
         if email_query:
@@ -34,6 +37,7 @@ def create_user():
         user.email = email
         user.name = name
         user.lastname = lastname
+        user.phone = phone
         # hashed_password = generate_password_hash(password)
         user.password = password
         print(user)
