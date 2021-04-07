@@ -14,7 +14,7 @@ export const NavigationBar = () => {
 		<>
 			<Navbar bg="warning" expand="lg">
 				<div className="container">
-					<Navbar.Brand href="#home">
+					<Navbar.Brand href="/">
 						<img src={logo} alt="" width="150" />
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
