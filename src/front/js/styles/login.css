@@ -11,10 +11,7 @@
 .con1 {
 padding-top: 100px;
 align-content: center;
-
 }
-
-
 
 .card-login{
 height: 370px;
@@ -37,6 +34,7 @@ cursor: pointer;
 }
 
 .card-header h3{
+font-family: 'Pacifico', cursive;
 color: white;
 margin-right: 16rem;
 }
