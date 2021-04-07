@@ -203,6 +203,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+            createUser: (newUser) =>{
+                fetch(process.env.BACKEND_URL + "/api/create-user", {
+                    method:"POST",
+                    headers:{"Content-Type": "application/json"},
+                    body: JSON.stringify(newUser)
+                }).then(response => response.json())
+                .then(data=>{
+                    console.log(data);
+                })
+            }
+
 			getMessage: () => {
 				// fetching data from the backend
 				fetch(process.env.BACKEND_URL + "/api/hello")
