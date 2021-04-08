@@ -50,3 +50,21 @@ def create_user():
         }
         return jsonify(response), 200
     
+@api.route('/login', methods=['POST'])
+def login():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+
+    if not email:
+        return jsonify({"msg":"Email Requerido"}), 400
+    if not password:
+            return jsonify({"msg":"Password is required"}), 400
+
+    user = User.query.filter_by(email=email).first()
+
+    response={
+        "firstName": user.firstName,
+        "email": user.email
+    }
+
+    return jsonify(response), 200            
