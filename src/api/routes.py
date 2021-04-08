@@ -48,5 +48,5 @@ def create_user():
             "msg": "Usuario Creado Satisfactoriamente",
             "name": firstName
         }
-        return jsonify(response_token), 200
+        return jsonify(response), 200
     
