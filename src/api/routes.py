@@ -8,22 +8,22 @@ from api.utils import generate_sitemap, APIException
 api = Blueprint('api', __name__)
 
 
-@api.route('/create-user', methods=['GET','POST'])
+@api.route('/create-user', methods=['POST'])
 def create_user():
-    if request.method == 'POST':
+    
         email = request.json.get("email", None)
         password = request.json.get("password", None)
-        name = request.json.get("name", None)
-        lastname = request.json.get("lastname", None)
+        firstName = request.json.get("firstName", None)
+        lastName = request.json.get("lastName", None)
         phone = request.json.get("phone", None)
 
         if not email:
             return "Email requerido", 401
         if not password:
             return "Password requerido", 401
-        if not name:
+        if not firstName:
             return "Nombre requerido", 401
-        if not lastname:
+        if not lastName:
             return "Apellido requerido", 401
         if not phone:
             return "Telefono requerido", 401    
@@ -35,8 +35,8 @@ def create_user():
 
         user = User()
         user.email = email
-        user.name = name
-        user.lastname = lastname
+        user.firstName = firstName
+        user.lastName = lastName
         user.phone = phone
         # hashed_password = generate_password_hash(password)
         user.password = password
@@ -46,10 +46,7 @@ def create_user():
 
         response = {
             "msg": "Usuario Creado Satisfactoriamente",
-            "name": name
+            "name": firstName
         }
-        return jsonify(response), 200
-    if request.method == 'GET':
-        response_body = {"message": "Mensaje linea 49"}    
-
-        return jsonify(response_body), 200
+        return jsonify(response_token), 200
+    

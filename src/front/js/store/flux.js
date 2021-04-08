@@ -203,17 +203,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			createUser: newUser => {
+			createUser: user => {
 				fetch(process.env.BACKEND_URL + "/api/create-user", {
 					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(newUser)
+					body: JSON.stringify(user),
+					headers: { "Content-type": "application/json" }
 				})
 					.then(response => response.json())
-					// .then(data => {
-					// 	console.log(data);
-					// })
-					.catch(error => console.log("Error loading message from backend", error));
+					.then(data => {
+						setStore({ user: data });
+					})
+					.catch(error => {
+						console.log("Error inesperado", error);
+					});
 			},
 
 			// getMessage: () => {
