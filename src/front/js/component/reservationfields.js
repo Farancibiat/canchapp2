@@ -36,8 +36,8 @@ export const ReservationFields = () => {
 					precio_final: "27.000",
 					complex_mail: "arancibiat.felipe@gmail.com",
 					complex_phone: "+5695797420",
-					user_mail: "hectorsalas7@gmail.com",
-					reply_to: "ces.acevedo.23@gmail.com"
+					user_mail: "arancibiat.felipe@gmail.com",
+					reply_to: "arancibiat.felipe@gmail.com"
 				},
 				"user_F3htLlSg7bVzumwkoOdNw"
 			)
