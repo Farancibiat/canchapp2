@@ -7,7 +7,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logedUser: {
 				firstName: "",
 				lastName: "",
-				email: ""
+				email: "",
+				phone: "",
+				id: ""
 			},
 			reserve: {
 				servShirts: false,
@@ -224,8 +226,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (localStorage.getItem("token") != null) {
 					const tokenLocal = localStorage.getItem("token");
 					const userLocal = JSON.parse(localStorage.getItem("user"));
-					console.log("getToken.token" + tokenlocal);
-					console.log("getToken.logedUser" + tokenlocal);
+					console.log("getToken.token" + tokenLocal);
+					console.log("getToken.logedUser" + tokenLocal);
 					setStore({ token: tokenLocal });
 					setStore({ logedUser: userLocal });
 					setStore({ loginStatus: true });
@@ -246,12 +248,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ token: data.token });
 						setStore({ logedUser: data.user });
 						setStore({ loginStatus: true });
+						console.log("setLogin.RememberMe: " + rememberMe);
 						if (rememberMe) {
 							console.log(data.token);
 							if (typeof Storage !== "undefined") {
-								console.log("setLogin.storage " + `${typeof Storage}`);
-								console.log("setLogin.token " + `${data.token}`);
-								console.log("setLogin.user" + JSON.stringify(data.user));
+								console.log("1setLogin.storage " + `${typeof Storage}`);
+								console.log("1setLogin.token " + `${data.token}`);
+								console.log("1setLogin.user" + JSON.stringify(data.user));
 								localStorage.setItem("token", data.token);
 								localStorage.setItem("user", JSON.stringify(data.user));
 							} else {
@@ -259,6 +262,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							}
 						} else {
 							if (typeof Storage !== "undefined") {
+								console.log("setLogin.storage " + `${typeof Storage}`);
+								console.log("setLogin.token " + `${data.token}`);
+								console.log("setLogin.user" + JSON.stringify(data.user));
 								sessionStorage.setItem("token", data.token);
 								sessionStorage.setItem("user", JSON.stringify(data.user));
 							} else {

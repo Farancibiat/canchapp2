@@ -20,6 +20,11 @@ export const Login = () => {
 			remember
 		);
 	};
+	function handleChange(event) {
+		const input = event.target;
+		const value = input.type === "checkbox" ? input.checked : input.value;
+		setRemember(value);
+	}
 
 	return (
 		<div className="fondo-login justify-content-center">
@@ -60,8 +65,13 @@ export const Login = () => {
 									/>
 								</div>
 								<div className="row align-items-center remember">
-									<input value={remember} type="checkbox" />
-									Remember Me
+									<input
+										name="remember"
+										checked={remember}
+										onChange={e => handleChange(e)}
+										type="checkbox"
+										id="RememberMe"
+									/>
 								</div>
 								<div className=" form-group">
 									<input type="submit" value="Login" className="btn float-right login_btn" />
