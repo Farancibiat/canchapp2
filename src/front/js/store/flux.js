@@ -2,12 +2,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			loginStatus: false,
+			token: "",
+
 			logedUser: {
 				firstName: "",
 				lastName: "",
-				email: "",
-				pass: "",
-				birthDate: null
+				email: ""
 			},
 			reserve: {
 				servShirts: false,
@@ -196,7 +196,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			// Use getActions to call a function within a fuction
 			cerrarSesion: () => {
-				setStore({ loginStatus: true });
+				setStore({ loginStatus: false });
 			},
 
 			exampleFunction: () => {
@@ -216,6 +216,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => {
 						console.log("Error inesperado", error);
 					});
+			},
+
+			getToken: () => {
+				if (localStorage.getItem("token") != null) {
+					const tokenLocal = localStorage.getItem("token");
+					const userLocal = JSON.parse(localStorage.getItem("user"));
+
+					setStore({ token: tokenLocal });
+					setStore({ logedUser: userLocal });
+					setStore({ loginStatus: true });
+
+					console.log("-->", tokenLocal);
+					console.log("-->", JSON.stringify(userLocal));
+				}
+			},
+
+			setLogin: (user, rememberMe) => {
+				fetch(process.env.BACKEND_URL + "/api/login", {
+					method: "POST",
+					body: JSON.stringify(user),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ token: data.token });
+						setStore({ logedUser: data.user });
+						setStore({ loginStatus: true });
+						if (rememberMe) {
+							if (typeof Storage !== "undefined") {
+								localStorage.setItem("token", data.token);
+								localStorage.setItem("user", JSON.stringify(data.user));
+							} else {
+								console.log("LocalStorage no soportado en este navegador");
+							}
+						} else {
+							if (typeof Storage !== "undefined") {
+								sessionStorage.setItem("token", data.token);
+								sessionStorage.setItem("user", JSON.stringify(data.user));
+							} else {
+								console.log("LocalStorage no soportado en este navegador");
+							}
+						}
+					})
+					.catch(error => console.log("Error loading message from backend", error));
 			},
 
 			// getMessage: () => {

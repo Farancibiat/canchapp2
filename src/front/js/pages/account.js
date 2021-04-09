@@ -29,7 +29,6 @@ export const Account = () => {
 				<article className="account-style card-body mx-auto rounded-lg">
 					<h4 className="card-title mt-3 text-center">Crea Tu Cuenta</h4>
 					<p className="text-center" />
-					<button className="tbn-warning" onClick={handleSubmit} />
 					<p className="divider-text">
 						<span className="bg-transparent" />
 					</p>
