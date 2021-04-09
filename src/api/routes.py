@@ -102,21 +102,15 @@ def create_recinto():
         }
         return jsonify(response), 200
 
-@api.route('/recinto/<int:id>', methods=['DELETE','GET'])
+@api.route('/recinto/<int:id>', methods=['GET'])
 def get_recinto(id):
-    if request.method == 'POST':
-        recinto = Recinto.query.get(id)
-        response_body={
-            "recintos": recinto
-        }
-        return jsonify(response_body), 200
-    else:
-        recinto = Recinto.query.get(id)
-        recinto.delete()
-        db.session.commit()
-        response_body={
-        "msg": "Recinto borrado correctamente"
+    
+    recinto = Recinto.query.all()
+    recinto = list(map(lambda x: x.serialize(),recinto))
+    response_body={
+        "recintos": recinto[id]
     }
-
-    return jsonify(response_body), 200    
-
+    
+    return jsonify(response_body), 200
+  
+  

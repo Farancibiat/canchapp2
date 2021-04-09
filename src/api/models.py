@@ -33,6 +33,8 @@ class Recinto(db.Model):
     nameRecinto = db.Column(db.String(80), unique=True, nullable=False)
     openHour= db.Column(db.Integer, unique=False, nullable=False)
     closeHour= db.Column(db.Integer, unique=False, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.Integer, unique=False, nullable=False)
     
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
    
@@ -44,8 +46,9 @@ class Recinto(db.Model):
             "id": self.id,
             "nameRecinto": self.nameRecinto,
             "openHour": self.openHour,
-            "closeHour": self.closeHour
-
+            "closeHour": self.closeHour,
+            "email": self.email,
+            "phone": self.phone
 }
 
 class Reservas(db.Model):

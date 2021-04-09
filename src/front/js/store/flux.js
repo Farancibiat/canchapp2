@@ -13,10 +13,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			complexId: "",
 			reserve: {
+				complexName: "",
+				idReserva: "",
+				fecha: "",
+				hora: "",
+				complexMail: "",
+				complexPhone: "",
 				servShirts: false,
 				servBall: false,
-				servReferee: false,
-				hour: null
+				servReferee: false
 			},
 			complex: {
 				id: 0,
@@ -274,6 +279,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setComplexId: id => {
 				setStore({ complexId: id });
+			},
+
+			cargarComplejo: () => {
+				console.log(getStore().complexId);
+				fetch(process.env.BACKEND_URL + `/api/recinto/${getStore().complexId}`, {
+					method: "GET",
+					headers: { "Content-Type": "application/json" }
+				})
+					.then(data => data.json())
+					.then(response => {
+						console.log(response);
+					});
 			}
 		}
 	};

@@ -84,9 +84,7 @@ export const Login = () => {
 						<div className="card-footer">
 							<div className="d-flex justify-content-center links" />
 							<div className="d-flex justify-content-center">
-
 								<Link to={"/recover/"}>Olvidaste tu contraseña?</Link>
-
 							</div>
 						</div>
 					</div>
