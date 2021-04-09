@@ -1,5 +1,6 @@
 // import Tools
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Context } from "../store/appContext";
 import Datepicker from "react-datepicker";
 import emailjs from "emailjs-com";
 
@@ -11,7 +12,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import Cancha from "../../img/img_reserva.jpg";
 
 export const ReservationFields = () => {
+	const { store, actions } = useContext(Context);
 	const [selectDate, setSelectDate] = useState(null);
+
+	useEffect(() => {
+		actions.cargarComplejo();
+	}, []);
 
 	function sendEmail(e) {
 		e.preventDefault();
@@ -22,22 +28,19 @@ export const ReservationFields = () => {
 				"rent_u94nq7m",
 				{
 					complex_name: "Estadio Monumental",
-					to_name: "Hector",
+					to_name: `${store.logedUser.firstName} ${store.logedUser.lastName}`,
 					id_reserva: "007",
 					fecha: "27/05/2021",
 					hora: "21",
-					precio: "10.000",
-					tshirts: "Si",
-					tshirts_price: "1.000",
-					ball: "Si",
+					precio: "20.000",
+					tshirts_price: "3.000",
 					ball_price: "1.000",
-					referee: "Si",
 					referee_price: "15.000",
 					precio_final: "27.000",
 					complex_mail: "arancibiat.felipe@gmail.com",
 					complex_phone: "+5695797420",
-					user_mail: "arancibiat.felipe@gmail.com",
-					reply_to: "arancibiat.felipe@gmail.com"
+					user_mail: store.logedUser.email,
+					reply_to: "pichangapp.corp@gmail.com"
 				},
 				"user_F3htLlSg7bVzumwkoOdNw"
 			)
