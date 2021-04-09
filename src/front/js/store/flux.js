@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				phone: "",
 				id: ""
 			},
+			complexId: "",
 			reserve: {
 				servShirts: false,
 				servBall: false,
@@ -269,6 +270,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			setComplexId: id => {
+				setStore({ complexId: id });
 			}
 		}
 	};
