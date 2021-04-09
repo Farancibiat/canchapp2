@@ -27,5 +27,39 @@ class User(db.Model):
             # do not serialize the password, its a security breach
 }
 
+class Recinto(db.Model):
+    __tablename__ = 'recinto'
+    id = db.Column(db.Integer, primary_key=True)
+    nameRecinto = db.Column(db.String(80), unique=True, nullable=False)
+    openHour= db.Column(db.Integer, unique=False, nullable=False)
+    closeHour= db.Column(db.Integer, unique=False, nullable=False)
+    
+    # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+   
+    def __repr__(self):
+        return '<Recinto %r>' % self.nameRecinto
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "nameRecinto": self.nameRecinto,
+            "openHour": self.openHour,
+            "closeHour": self.closeHour
 
+}
+
+class Reservas(db.Model):
+    __tablename__ = "reservas"
+    id = db.Column(db.Integer, primary_key=True)
+    idRecinto = db.Column(db.Integer, unique=False, nullable=False)
+    horaReserva = db.Column(db.String(30), unique=False, nullable=False)
+
+    def __repr__(self):
+        return '<Reservas %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "idRecinto": self.idRecinto,
+            "horaReserva": self.horaReserva
+}           

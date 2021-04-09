@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Recinto, Reservas
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 import datetime
@@ -50,7 +50,7 @@ def create_user():
             "msg": "Usuario Creado Satisfactoriamente",
             "name": firstName
         }
-        return jsonify(response), 200
+        return jsonify(response), 200        
     
 @api.route('/login', methods=['POST'])
 def login():
@@ -76,4 +76,47 @@ def login():
         "token": access_token
     }
 
-    return jsonify(response), 200            
+    return jsonify(response), 200
+
+#Aqui parten las funciones de recinto
+
+@api.route('/recinto/', methods=['POST'])
+def create_recinto():
+    
+        nameRecinto = request.json.get("nameRecinto", None)
+        openHour= request.json.get("openHour", None)
+        closeHour = request.json.get("closeHour", None)
+    
+        recinto = Recinto()
+        recinto.nameRecinto = nameRecinto
+        # hashed_password = generate_password_hash(password)
+        recinto.openHour = openHour
+        recinto.closeHour = closeHour
+        print(recinto)
+        db.session.add(recinto)
+        db.session.commit()
+
+        response = {
+            "msg": "Recinto Creado Satisfactoriamente",
+            "name": nameRecinto
+        }
+        return jsonify(response), 200
+
+@api.route('/recinto/<int:id>', methods=['DELETE','GET'])
+def get_recinto(id):
+    if request.method == 'POST':
+        recinto = Recinto.query.get(id)
+        response_body={
+            "recintos": recinto
+        }
+        return jsonify(response_body), 200
+    else:
+        recinto = Recinto.query.get(id)
+        recinto.delete()
+        db.session.commit()
+        response_body={
+        "msg": "Recinto borrado correctamente"
+    }
+
+    return jsonify(response_body), 200    
+

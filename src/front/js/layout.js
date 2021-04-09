@@ -10,11 +10,11 @@ import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { NotFound } from "./pages/notfound";
 import { Profile } from "./pages/profile";
+import { Recoverpassword } from "./pages/recoverpass";
 import { Recover } from "./pages/recover";
 import { Reserve } from "./pages/reserve";
 
 import injectContext from "./store/appContext";
-
 import { NavigationBar } from "./component/navigationbar";
 import { Footer } from "./component/footer";
 
@@ -52,6 +52,9 @@ const Layout = () => {
 					</Route>
 					<Route exact path="/recover">
 						<Recover />
+					</Route>
+					<Route exact path="/recoverpass">
+						<Recoverpassword />
 					</Route>
 					<Route exact path="/reserve/:theId">
 						<Reserve />

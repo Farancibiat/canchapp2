@@ -128,7 +128,7 @@ export const Account = () => {
 						</div> */}
 						<div className="form-group">
 							<button type="submit" className="btn btn-primary btn-block" onClick={handleSubmit}>
-								Create Account
+								Crear Cuenta
 							</button>
 						</div>
 					</form>
