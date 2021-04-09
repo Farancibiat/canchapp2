@@ -10,7 +10,7 @@ import Step4 from "/workspace/canchapp2/src/front/img/step4.jpg";
 const Stepper = () => {
 	return (
 		<>
-			<div className="row">
+			<div className="row pt-3">
 				<div className="col-sm-3">
 					<div className="card">
 						<div className="card-body">
