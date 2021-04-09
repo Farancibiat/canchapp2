@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "../component/header";
 import { Context } from "../store/appContext";
 import ReservationFields from "../component/reservationfields";
+import NotLogRes from "../component/notlogres";
 
 import "../styles/agendar.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,7 +14,7 @@ export const Reserve = () => {
 	return (
 		<>
 			<Header />
-			<ReservationFields />
+			{store.loginStatus ? <ReservationFields /> : <NotLogRes />}
 		</>
 	);
 };
