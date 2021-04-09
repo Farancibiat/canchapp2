@@ -199,6 +199,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Use getActions to call a function within a fuction
 			cerrarSesion: () => {
 				setStore({ loginStatus: false });
+				setStore({
+					logedUser: {
+						firstName: "",
+						lastName: "",
+						email: "",
+						phone: "",
+						id: ""
+					}
+				});
+				localStorage.clear();
+				sessionStorage.clear();
 			},
 
 			exampleFunction: () => {
@@ -221,19 +232,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getToken: () => {
-				console.log("el getToken también corrioooo");
-				console.log(`${localStorage.getItem("token")}`);
 				if (localStorage.getItem("token") != null) {
 					const tokenLocal = localStorage.getItem("token");
 					const userLocal = JSON.parse(localStorage.getItem("user"));
-					console.log("getToken.token" + tokenLocal);
-					console.log("getToken.logedUser" + tokenLocal);
 					setStore({ token: tokenLocal });
 					setStore({ logedUser: userLocal });
 					setStore({ loginStatus: true });
-
-					console.log("-->", tokenLocal);
-					console.log("-->", JSON.stringify(userLocal));
 				}
 			},
 
@@ -248,13 +252,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ token: data.token });
 						setStore({ logedUser: data.user });
 						setStore({ loginStatus: true });
-						console.log("setLogin.RememberMe: " + rememberMe);
 						if (rememberMe) {
-							console.log(data.token);
 							if (typeof Storage !== "undefined") {
-								console.log("1setLogin.storage " + `${typeof Storage}`);
-								console.log("1setLogin.token " + `${data.token}`);
-								console.log("1setLogin.user" + JSON.stringify(data.user));
 								localStorage.setItem("token", data.token);
 								localStorage.setItem("user", JSON.stringify(data.user));
 							} else {
@@ -262,9 +261,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							}
 						} else {
 							if (typeof Storage !== "undefined") {
-								console.log("setLogin.storage " + `${typeof Storage}`);
-								console.log("setLogin.token " + `${data.token}`);
-								console.log("setLogin.user" + JSON.stringify(data.user));
 								sessionStorage.setItem("token", data.token);
 								sessionStorage.setItem("user", JSON.stringify(data.user));
 							} else {
@@ -273,28 +269,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					})
 					.catch(error => console.log("Error loading message from backend", error));
-			},
-
-			// getMessage: () => {
-			// 	// fetching data from the backend
-			// 	fetch(process.env.BACKEND_URL + "/api/hello")
-			// 		.then(resp => resp.json())
-			// 		.then(data => setStore({ message: data.message }));
-			// 	// .catch(error => console.log("Error loading message from backend", error));
-			// },
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
 			}
 		}
 	};
