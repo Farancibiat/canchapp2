@@ -219,10 +219,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getToken: () => {
+				console.log("el getToken también corrioooo");
+				console.log(`${localStorage.getItem("token")}`);
 				if (localStorage.getItem("token") != null) {
 					const tokenLocal = localStorage.getItem("token");
 					const userLocal = JSON.parse(localStorage.getItem("user"));
-
+					console.log("getToken.token" + tokenlocal);
+					console.log("getToken.logedUser" + tokenlocal);
 					setStore({ token: tokenLocal });
 					setStore({ logedUser: userLocal });
 					setStore({ loginStatus: true });
@@ -244,7 +247,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ logedUser: data.user });
 						setStore({ loginStatus: true });
 						if (rememberMe) {
+							console.log(data.token);
 							if (typeof Storage !== "undefined") {
+								console.log("setLogin.storage " + `${typeof Storage}`);
+								console.log("setLogin.token " + `${data.token}`);
+								console.log("setLogin.user" + JSON.stringify(data.user));
 								localStorage.setItem("token", data.token);
 								localStorage.setItem("user", JSON.stringify(data.user));
 							} else {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/notfound.css";
-import SadPlayer from "../../img/favpng_marcel-sabitzer-rb-leipzig-jersey-soccer-player-clip-art.png";
+import SadPlayer from "../../img/pinilla.png";
 // import { Context } from "../store/appContext";
 
 export const NotFound = () => {

@@ -4,6 +4,7 @@ import "../styles/navigationbar.css";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { LinkContainer } from "react-router-bootstrap";
 
 export const NavigationBar = () => {
 	const { store, actions } = useContext(Context);
@@ -14,37 +15,50 @@ export const NavigationBar = () => {
 		<>
 			<Navbar bg="warning" expand="lg">
 				<div className="container">
-					<Navbar.Brand href="/">
-						<img src={logo} alt="" width="150" />
-					</Navbar.Brand>
+					<LinkContainer to="/">
+						<Link class="navbar-brand" to="/">
+							<img src={logo} alt="" width="150" />
+						</Link>
+					</LinkContainer>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="ml-auto">
-							<Nav.Link href="/">
-								<button type="button" className="btn btn-primary">
-									Home
-								</button>
-							</Nav.Link>
 							{store.loginStatus ? (
 								<>
-									<Nav.Link href="/">
-										<button type="button" className="btn btn-danger" onClick={cerrarSesion}>
+									<p className="mr-4 mt-3">
+										<strong>¡Bienvenid@ {store.logedUser.firstName}!</strong>
+									</p>
+									<LinkContainer to="/">
+										<button type="button" className="btn mr-3 mt-2 btn-primary">
+											Home
+										</button>
+									</LinkContainer>
+									<LinkContainer to="/">
+										<button
+											type="button"
+											className="btn mr-3 mt-2 btn-danger"
+											onClick={cerrarSesion}>
 											Cerrar Sesion
 										</button>
-									</Nav.Link>
+									</LinkContainer>
 								</>
 							) : (
 								<>
-									<Nav.Link href="/login">
-										<button type="button" className="btn btn-info">
+									<LinkContainer to="/">
+										<button type="button" className="btn mr-3 mt-2 btn-primary">
+											Home
+										</button>
+									</LinkContainer>
+									<LinkContainer to="/login">
+										<button type="button" className="btn mr-3 mt-2 btn-info">
 											Login
 										</button>
-									</Nav.Link>
-									<Nav.Link href="/account">
-										<button type="button" className="btn btn-success">
+									</LinkContainer>
+									<LinkContainer to="/account">
+										<button type="button" className="btn mr-3 mt-2 btn-success">
 											Registrate
 										</button>
-									</Nav.Link>
+									</LinkContainer>
 								</>
 							)}
 						</Nav>
