@@ -27,8 +27,10 @@ export const Header = () => {
 		const aux = window.location.pathname.split("/");
 		if (aux[1] == "reserve") {
 			setUrl(`${e.target.value}`);
+			actions.setComplexId(e.target.value);
 		} else {
 			setUrl(`reserve/${e.target.value}`);
+			actions.setComplexId(e.target.value);
 		}
 	}
 	return (
@@ -74,7 +76,7 @@ export const Header = () => {
 								<div className="col-2 px-1">
 									<select className="custom-select" id="selectCancha" onChange={e => change_url(e)}>
 										<option selected>Cancha</option>
-										{// Renderizado de regiones en Store
+										{// Renderizado de complejos(recintos)
 										complex.map((complexName, index) => {
 											return (
 												<option key={index} value={index}>
