@@ -1,8 +1,6 @@
 
 .agendamiento{
     display: flex;
-    justify-content: center;
-    padding: 20px;
 }
 .fila{
     display: flex;
@@ -16,7 +14,6 @@
 }
 
 .contenedor_agenda{
-    padding: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -27,7 +24,7 @@
 
 .contenedor_verde{
     margin: 5px;
-    padding: 40px;
+    padding: 30px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -44,13 +41,8 @@
 }
 .contenedor_amarillo{
     margin: 5px;
-    padding: 40px;
+    padding: 35px;
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    text-align: center;
     justify-content: center;
     background-color: #ffd200;
     color: darkgreen;

@@ -65,15 +65,18 @@ export const Login = () => {
 									/>
 								</div>
 								<div className="row align-items-center remember">
-									<input
-										name="remember"
-										checked={remember}
-										onChange={e => handleChange(e)}
-										type="checkbox"
-										id="RememberMe"
-									/>
+									<div className="col-12 d-flex">
+										<input
+											name="remember"
+											checked={remember}
+											onChange={e => handleChange(e)}
+											type="checkbox"
+											id="RememberMe"
+										/>
+										<p>Recordar contraseña</p>
+									</div>
 								</div>
-								<div className=" form-group">
+								<div className=" form-group pb-3">
 									<input type="submit" value="Login" className="btn float-right login_btn" />
 								</div>
 							</form>
@@ -81,7 +84,9 @@ export const Login = () => {
 						<div className="card-footer">
 							<div className="d-flex justify-content-center links" />
 							<div className="d-flex justify-content-center">
+
 								<Link to={"/recover/"}>Olvidaste tu contraseña?</Link>
+
 							</div>
 						</div>
 					</div>
