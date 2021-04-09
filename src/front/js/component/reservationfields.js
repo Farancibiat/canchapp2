@@ -52,50 +52,61 @@ export const ReservationFields = () => {
 	}
 
 	return (
-		<div className="agendamiento">
-			<div className="contenedor_agenda">
-				<h2 className="encabezado_pichanga">Reserva</h2>
-				<p>
-					En este apartado podras elegir la fecha que necesites para jugar tu{" "}
-					<span className="text_pichanga">Pichanga:</span>
+		<>
+			<div className="container text-center d-flex flex-column justify-content-center my-5">
+				<h5 className="display-4 lead encabezado_pichanga">Reserva tu cancha</h5>
+				<p className="lead">
+					Selecciona la fecha, horario y si necesitas algún accesorio, puedes selecionarlo:
 				</p>
-				<form className="formulario_seleccion" onSubmit={sendEmail}>
-					<div className="fila">
-						<div className="contenedor_verde">
-							<h4>Selecciona la fecha:</h4>
-							<Datepicker
-								className="fecha"
-								selected={selectDate}
-								onChange={date => setSelectDate(date)}
-								dateFormat="dd/MM/yyyy"
-								minDate={new Date()}
-							/>
-							<h4>Horario</h4>
-							<input type="time" />
-						</div>
-						<div className="contenedor_amarillo">
-							<h4>Seleccione accesorios</h4>
-							<div className="row">
-								<input type="checkbox" id="arbitro" />
-								<h5> Arbitro</h5>
+
+				<form onSubmit={sendEmail}>
+					<div className="row">
+						<article className="col-12 col-md-6">
+							<div className="contenedor_verde">
+								<h5>Selecciona la fecha:</h5>
+								<Datepicker
+									className="fecha"
+									selected={selectDate}
+									onChange={date => setSelectDate(date)}
+									dateFormat="dd/MM/yyyy"
+									minDate={new Date()}
+								/>
+								<h6 className="mt-2">Horario</h6>
+								<input type="time" />
 							</div>
-							<div className="row">
-								<input type="checkbox" id="arbitro" />
-								<h5> Camiseta</h5>
+						</article>
+						<article className="col-12 col-md-6">
+							<div className="contenedor_amarillo">
+								<h5 className="mb-3">Seleccione accesorios</h5>
+								<div className="row justify-content-center">
+									<input type="checkbox" id="arbitro" className="mr-2" />
+									<h6>Arbitro</h6>
+								</div>
+								<div className="row justify-content-center">
+									<input type="checkbox" id="arbitro" className="mr-2" />
+									<h6>Camiseta</h6>
+								</div>
+								<div className="row justify-content-center">
+									<input type="checkbox" id="arbitro" className="mr-2" />
+									<h6>Balon</h6>
+								</div>
 							</div>
-							<div className="row">
-								<input type="checkbox" id="arbitro" />
-								<h5> Balon</h5>
-							</div>
-						</div>
+						</article>
 					</div>
-					<button type="submit" className="btn btn-success">
-						Procesar
-					</button>
-					<img src={Cancha} alt="Small Court" />
+					<p className="mt-4">
+						Haz click en reservar y te haremos llegar un correo con los detalles de tu reserva:
+					</p>
+					<div className="row my-3 mx-1 justify-content-center">
+						<button type="submit" className="btn btn-primary btn-lg">
+							Reservar
+						</button>
+					</div>
 				</form>
+				<div className="row my-2 mx-1 justify-content-center">
+					<img src={Cancha} alt="Small Court" />
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
