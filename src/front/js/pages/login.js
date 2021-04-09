@@ -6,16 +6,19 @@ import { Link } from "react-router-dom";
 export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [remember, setRemember] = useState(false);
+	const [password, setPassword] = useState("");
+	const [remember, setRemember] = useState(false);
 
-	const handlerSubmit = async e => {
+	const handlerSubmit = e => {
 		e.preventDefault();
 
-		await actions.setLogin({
-			email: email,
-			password: password
-		});
+		actions.setLogin(
+			{
+				email: email,
+				password: password
+			},
+			remember
+		);
 	};
 
 	return (
@@ -57,7 +60,7 @@ export const Login = () => {
 									/>
 								</div>
 								<div className="row align-items-center remember">
-									<input value={remember} type="checkbox" onClick={setRemember(!remember)} />
+									<input value={remember} type="checkbox" />
 									Remember Me
 								</div>
 								<div className=" form-group">
@@ -77,3 +80,4 @@ export const Login = () => {
 		</div>
 	);
 };
+// onClick={setRemember(!remember)}

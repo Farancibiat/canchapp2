@@ -7,9 +7,9 @@ import { Context } from "../store/appContext";
 
 export const NavigationBar = () => {
 	const { store, actions } = useContext(Context);
-	const cerrarSesion = () => {
+	function cerrarSesion() {
 		actions.cerrarSesion();
-	};
+	}
 	return (
 		<>
 			<Navbar bg="warning" expand="lg">

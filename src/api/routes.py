@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+import datetime
 
 api = Blueprint('api', __name__)
 
@@ -63,9 +64,16 @@ def login():
 
     user = User.query.filter_by(email=email).first()
 
+    if not user:
+        return jsonify({"msg": "The email is not correct"
+        }), 401
+
+    expiration = datetime.timedelta(days=5)
+    access_token = create_access_token(identity=user.email, expires_delta=expiration)
+
     response={
-        "firstName": user.firstName,
-        "email": user.email
+        "user": user.serialize(),
+        "token": access_token
     }
 
     return jsonify(response), 200            
