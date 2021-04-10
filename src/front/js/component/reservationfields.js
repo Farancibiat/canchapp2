@@ -20,6 +20,8 @@ export const ReservationFields = () => {
 
 	useEffect(() => {
 		actions.cargarComplejo();
+		actions.getAllReserves();
+		actions.createReserva();
 	}, []);
 
 	function sendEmail(e) {

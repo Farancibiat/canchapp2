@@ -17,7 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			reserve: {
 				reserveId: "",
 				fecha: "",
-				hora: "",
+				hora: 5,
 				servShirts: false,
 				servBall: false,
 				servReferee: false
@@ -274,6 +274,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 
+			createReserva: () => {
+				const aux = {
+					idRecinto: getStore().complexId,
+					horaReserva: getStore().reserve.hora,
+					fecha: getStore().reserve.fecha
+				};
+				console.log(aux);
+				fetch(process.env.BACKEND_URL + "/api/reserve/", {
+					method: "POST",
+					body: JSON.stringify(aux),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log("Esto es createReserva", data.reserva);
+					});
+			},
+
 			setComplexId: id => {
 				setStore({ complexId: id });
 			},
@@ -292,6 +310,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						});
 					});
 			},
+
+			getAllReserves: () => {
+				fetch(process.env.BACKEND_URL + `/api/reserves/`, {
+					method: "GET",
+					headers: { "Content-Type": "application/json" }
+				})
+					.then(data => data.json())
+					.then(response => {
+						console.log(response);
+						setStore({
+							unavailable: response.reservas
+						});
+					});
+			},
+
 			setToast: aux => {
 				setStore({ loginToast: aux });
 			},

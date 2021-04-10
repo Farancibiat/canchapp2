@@ -55,7 +55,9 @@ class Reservas(db.Model):
     __tablename__ = "reservas"
     id = db.Column(db.Integer, primary_key=True)
     idRecinto = db.Column(db.Integer, unique=False, nullable=False)
-    horaReserva = db.Column(db.String(30), unique=False, nullable=False)
+    horaReserva = db.Column(db.Integer, unique=False, nullable=False)
+    fecha = db.Column(db.String, nullable=False)
+
 
     def __repr__(self):
         return '<Reservas %r>' % self.id
@@ -64,5 +66,6 @@ class Reservas(db.Model):
         return {
             "id": self.id,
             "idRecinto": self.idRecinto,
-            "horaReserva": self.horaReserva
+            "horaReserva": self.horaReserva,
+            "fecha": self.fecha
 }           

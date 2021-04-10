@@ -112,5 +112,36 @@ def get_recinto(id):
     }
     
     return jsonify(response_body), 200
-  
-  
+
+@api.route('/reserve/', methods=['POST'])
+def create_reserve():
+    
+        idRecinto = request.json.get("idRecinto", None)
+        horaReserva= request.json.get("horaReserva", None)
+        fecha=request.json.get("fecha", None)
+
+
+        reserva = Reservas()
+        reserva.idRecinto = idRecinto
+        # hashed_password = generate_password_hash(password)
+        reserva.horaReserva = horaReserva
+        reserva.fecha = fecha
+        db.session.add(reserva)
+        db.session.commit()
+
+        response = {
+            "msg": "Recinto Creado Satisfactoriamente",
+            "reserva": reserva
+        }
+        return jsonify(response), 200
+
+@api.route('/reserves/', methods=['GET'])
+def get_all_reserves():
+    
+    reserves = Reservas.query.all()
+    reserves = list(map(lambda x: x.serialize(),reserves))
+    response_body={
+        "reservas": reserves
+    }
+    
+    return jsonify(response_body), 200  
