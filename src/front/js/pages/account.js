@@ -30,7 +30,6 @@ export const Account = () => {
 
 			setRedirect(true);
 		} else {
-			console.log("entro");
 			toast.error(" ¡Complete todos los campos!", {
 				position: "top-center",
 				autoClose: 5000,
