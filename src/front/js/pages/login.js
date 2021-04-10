@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../styles/login.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -10,6 +10,7 @@ export const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [remember, setRemember] = useState(false);
+	const [redirect, setRedirect] = useState(null);
 
 	useEffect(() => {
 		if (store.loginToast) {
@@ -28,14 +29,27 @@ export const Login = () => {
 
 	const handlerSubmit = e => {
 		e.preventDefault();
-
-		actions.setLogin(
-			{
-				email: email,
-				password: password
-			},
-			remember
-		);
+		if (email != "" && password != "") {
+			actions.setLogin(
+				{
+					email: email,
+					password: password
+				},
+				remember
+			);
+			actions.setRegisterToast(true);
+			setRedirect(true);
+		} else {
+			toast.error(" ¡Complete todos los campos!", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+		}
 	};
 	function handleChange(event) {
 		const input = event.target;
@@ -45,6 +59,7 @@ export const Login = () => {
 
 	return (
 		<div className="fondo-login justify-content-center">
+			{redirect ? <Redirect to="/" /> : ""}
 			<ToastContainer />
 			<div className="con1">
 				<div className="d-flex justify-content-center h-100">

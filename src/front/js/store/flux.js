@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			loginStatus: false,
 			loginToast: false,
+			registerToast: false,
 			token: "",
 
 			logedUser: {
@@ -295,6 +296,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setToast: aux => {
 				setStore({ loginToast: aux });
+			},
+
+			setRegisterToast: aux => {
+				setStore({ registerToast: aux });
 			}
 		}
 	};
