@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			complexId: "",
 			reserve: {
-				complexName: "",
+				complexName: "404: complejo no econtrado",
 				idReserva: "",
 				fecha: "",
 				hora: "",

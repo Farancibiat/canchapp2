@@ -1,8 +1,10 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Header from "../component/header";
 import { Context } from "../store/appContext";
 import ReservationFields from "../component/reservationfields";
+import HeaderReserve from "../component/headerreserve";
+import SelectCancha from "../component/selectcancha";
 import NotLogRes from "../component/notlogres";
 
 import "../styles/agendar.css";
@@ -13,8 +15,16 @@ export const Reserve = () => {
 
 	return (
 		<>
-			<Header />
-			{store.loginStatus ? <ReservationFields /> : <NotLogRes />}
+			<HeaderReserve />
+			{store.loginStatus ? (
+				store.complexId == "" || location.pathname.split("/")[2] != store.complexId ? (
+					<SelectCancha />
+				) : (
+					<ReservationFields />
+				)
+			) : (
+				<NotLogRes />
+			)}
 		</>
 	);
 };
