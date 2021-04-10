@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
-import { CheckOut } from "./pages/checkout";
 import { Account } from "./pages/account";
 import { Contact } from "./pages/contact";
 import { Demo } from "./pages/demo";
@@ -29,26 +28,17 @@ const Layout = () => {
 			<ScrollToTop>
 				<NavigationBar />
 				<Switch>
-					<Route exact path="/checkout">
-						<CheckOut />
-					</Route>
 					<Route exact path="/account">
 						<Account />
 					</Route>
 					<Route exact path="/contact">
 						<Contact />
 					</Route>
-					<Route exact path="/demo">
-						<Demo />
-					</Route>
 					<Route exact path="/">
 						<Home />
 					</Route>
 					<Route exact path="/login">
 						<Login />
-					</Route>
-					<Route exact path="/profile/:userID">
-						<Profile id="userID" />
 					</Route>
 					<Route exact path="/recover">
 						<Recover />

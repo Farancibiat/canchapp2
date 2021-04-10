@@ -25,20 +25,22 @@ export const RecoverPass = () => {
 						</div>
 						<div className="card-body">
 							<form onSubmit={e => handlerSubmit(e)}>
-								{/* <div className="input-group form-group py-5">
+								<div className="form-group input-group">
 									<div className="input-group-prepend">
 										<span className="input-group-text">
-											<i className="fas fa-envelope" />
+											{" "}
+											<i className="fa fa-lock" />{" "}
 										</span>
 									</div>
 									<input
-										type="email"
-										value={email}
+										name="Password"
+										value={password}
 										className="form-control"
-										placeholder="Email"
-										onChange={e => setEmail(e.target.value)}
+										placeholder="Ingresa el código que te enviamos"
+										type="password"
+										onChange={e => setPassword(e.target.value)}
 									/>
-								</div> */}
+								</div>
 								<div className="input-group form-group">
 									<div className="input-group-prepend">
 										<span className="input-group-text">
