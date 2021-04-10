@@ -15,23 +15,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			complexId: "",
 			reserve: {
-				complexName: "404: complejo no econtrado",
-				idReserva: "",
+				reserveId: "",
 				fecha: "",
 				hora: "",
-				complexMail: "",
-				complexPhone: "",
 				servShirts: false,
 				servBall: false,
 				servReferee: false
 			},
-			complex: {
+			complejo: {
 				id: 0,
-				firstHour: 8,
-				lasthour: 11,
-				unavailable: []
+				nameRecinto: "404, complejo no econtrado",
+				openHour: 0,
+				closeHour: 0,
+				email: "",
+				phone: ""
 			},
-
+			unavailable: [],
 			searchEng: [
 				{
 					name: "Arica y Parinacota",
@@ -220,10 +219,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				sessionStorage.clear();
 			},
 
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-
 			createUser: user => {
 				fetch(process.env.BACKEND_URL + "/api/create-user", {
 					method: "POST",
@@ -292,6 +287,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => data.json())
 					.then(response => {
 						console.log(response);
+						setStore({
+							complejo: response.recintos
+						});
 					});
 			},
 			setToast: aux => {

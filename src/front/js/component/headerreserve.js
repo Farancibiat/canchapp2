@@ -8,6 +8,7 @@ export const HeaderReserve = () => {
 	// const [comunas, setComunas] = useState(["-"]);
 	// const [complex, setComplex] = useState(["-"]);
 	// const [url, setUrl] = useState("");
+	const aux = store.complejo.nameRecinto;
 
 	return (
 		<div className="fondo_header d-flex">
@@ -17,7 +18,7 @@ export const HeaderReserve = () => {
 						? `Inicia sesión para Reservar`
 						: store.complexId == ""
 							? `Selecciona una cancha primero`
-							: `${store.reserve.complexName}`}
+							: aux}
 				</h1>
 			</div>
 		</div>
