@@ -17,6 +17,7 @@ export const ReservationFields = () => {
 	const [polera, setPolera] = useState(0);
 	const [pelota, setPelota] = useState(0);
 	const [arbitro, setArbitro] = useState(0);
+	const [fecha, setFecha] = useState(null);
 
 	useEffect(() => {
 		actions.cargarComplejo();
@@ -24,6 +25,7 @@ export const ReservationFields = () => {
 
 	function sendEmail(e) {
 		e.preventDefault();
+		setFecha(`${selectDate.getYear}/${selectDate.getMonth}/${selectDate.getDay}`);
 		emailjs
 			.send(
 				"pichangapp_s26kmmb",
@@ -32,7 +34,7 @@ export const ReservationFields = () => {
 					complex_name: store.complejo.nameRecinto,
 					to_name: `${store.logedUser.firstName} ${store.logedUser.lastName}`,
 					id_reserva: store.reserve.reserveId,
-					fecha: "27/05/2021",
+					fecha: fecha,
 					hora: "21",
 					precio: "20000",
 					tshirts_price: `${polera ? 3000 : 0}`,
@@ -81,14 +83,26 @@ export const ReservationFields = () => {
 							<div className="contenedor_verde">
 								<h5>Selecciona la fecha:</h5>
 								<Datepicker
+									id="datepicker"
 									className="fecha"
 									selected={selectDate}
 									onChange={date => setSelectDate(date)}
 									dateFormat="dd/MM/yyyy"
 									minDate={new Date()}
 								/>
+
 								<h6 className="mt-2">Horario</h6>
-								<input type="time" />
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">
+										Options
+									</label>
+								</div>
+								<select class="custom-select" id="inputGroupSelect01">
+									<option selected>Choose...</option>
+									<option value="1">One</option>
+									<option value="2">Two</option>
+									<option value="3">Three</option>
+								</select>
 							</div>
 						</article>
 						<article className="col-12 col-md-6">
