@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			loginStatus: false,
+			loginToast: false,
 			token: "",
 
 			logedUser: {
@@ -291,6 +292,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => {
 						console.log(response);
 					});
+			},
+			setToast: aux => {
+				setStore({ loginToast: aux });
 			}
 		}
 	};

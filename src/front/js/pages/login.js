@@ -1,13 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [remember, setRemember] = useState(false);
+
+	useEffect(() => {
+		if (store.loginToast) {
+			actions.setToast(false);
+			toast.success("¡Registro exitoso! ", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+		}
+	}, []);
 
 	const handlerSubmit = e => {
 		e.preventDefault();
@@ -28,6 +45,7 @@ export const Login = () => {
 
 	return (
 		<div className="fondo-login justify-content-center">
+			<ToastContainer />
 			<div className="con1">
 				<div className="d-flex justify-content-center h-100">
 					<div className="card-login rounded-lg">
