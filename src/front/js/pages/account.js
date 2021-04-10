@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../styles/account.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Account = () => {
 	const { store, actions } = useContext(Context);
@@ -11,20 +13,39 @@ export const Account = () => {
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
 	const [password, setPassword] = useState("");
+	const [redirect, setRedirect] = useState(null);
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		actions.createUser({
-			firstName: firstName,
-			lastName: lastName,
-			email: email,
-			phone: parseInt(phone),
-			password: password
-		});
+		if (firstName != "" && lastName != "" && email != "" && password != "" && phone != "") {
+			actions.createUser({
+				firstName: firstName,
+				lastName: lastName,
+				email: email,
+				phone: parseInt(phone),
+				password: password
+			});
+
+			actions.setToast(true);
+
+			setRedirect(true);
+		} else {
+			console.log("entro");
+			toast.error(" ¡Complete todos los campos!", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+		}
 	};
 
 	return (
 		<div className="fondo-account">
+			{redirect ? <Redirect to="/login/" /> : ""}
 			<div className="card-account card ">
 				<article className="account-style card-body mx-auto rounded-lg">
 					<h4 className="card-title mt-3 text-center">Crea Tu Cuenta</h4>
@@ -130,6 +151,7 @@ export const Account = () => {
 							<button type="submit" className="btn btn-primary btn-block" onClick={handleSubmit}>
 								Crear Cuenta
 							</button>
+							<ToastContainer />
 						</div>
 					</form>
 				</article>
