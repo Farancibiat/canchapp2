@@ -14,6 +14,9 @@ import Cancha from "../../img/img_reserva.jpg";
 export const ReservationFields = () => {
 	const { store, actions } = useContext(Context);
 	const [selectDate, setSelectDate] = useState(null);
+	const [polera, setPolera] = useState(0);
+	const [pelota, setPelota] = useState(0);
+	const [arbitro, setArbitro] = useState(0);
 
 	useEffect(() => {
 		actions.cargarComplejo();
@@ -21,24 +24,23 @@ export const ReservationFields = () => {
 
 	function sendEmail(e) {
 		e.preventDefault();
-
 		emailjs
 			.send(
 				"pichangapp_s26kmmb",
 				"rent_u94nq7m",
 				{
-					complex_name: "Estadio Monumental",
+					complex_name: store.complejo.nameRecinto,
 					to_name: `${store.logedUser.firstName} ${store.logedUser.lastName}`,
-					id_reserva: "007",
+					id_reserva: store.reserve.reserveId,
 					fecha: "27/05/2021",
 					hora: "21",
 					precio: "20.000",
-					tshirts_price: "3.000",
-					ball_price: "1.000",
-					referee_price: "15.000",
-					precio_final: "27.000",
-					complex_mail: "arancibiat.felipe@gmail.com",
-					complex_phone: "+5695797420",
+					tshirts_price: `${polera ? 3000 : 0}`,
+					ball_price: `${pelota ? 2000 : 0}`,
+					referee_price: `${arbitro ? 15000 : 0}`,
+					precio_final: `${polera + pelota + arbitro + 20000}`,
+					complex_mail: store.complejo.email,
+					complex_phone: store.complejo.phone,
 					user_mail: store.logedUser.email,
 					reply_to: "pichangapp.corp@gmail.com"
 				},
