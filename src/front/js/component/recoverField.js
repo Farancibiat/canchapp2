@@ -39,31 +39,19 @@ export const RecoverField = () => {
 										onChange={e => setEmail(e.target.value)}
 									/>
 								</div>
-								{/* <div className="input-group form-group">
-									<div className="input-group-prepend">
-										<span className="input-group-text">
-											<i className="fas fa-key" />
-										</span>
-									</div>
-									<input
-										type="password"
-										value={password}
-										className="form-control"
-										placeholder="Contraseña"
-										onChange={e => setPassword(e.target.value)}
-									/>
-								</div> */}
 								<div className=" form-group">
 									<input type="submit" value="Enviar" className="btn float-right login_btn" />
 								</div>
 							</form>
 						</div>
-						{/* <div className="card-footer">
+						<div className="card-footer">
 							<div className="d-flex justify-content-center links" />
 							<div className="d-flex justify-content-center">
-								<Link to="#">Olvidaste tu contraseña?</Link>
+								<Link to="/recoverpass" className="text-white">
+									¿Ya tienes código? ingresalo aqui.
+								</Link>
 							</div>
-						</div> */}
+						</div>
 					</div>
 				</div>
 			</div>

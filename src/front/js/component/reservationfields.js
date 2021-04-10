@@ -34,11 +34,11 @@ export const ReservationFields = () => {
 					id_reserva: store.reserve.reserveId,
 					fecha: "27/05/2021",
 					hora: "21",
-					precio: "20.000",
+					precio: "20000",
 					tshirts_price: `${polera ? 3000 : 0}`,
 					ball_price: `${pelota ? 2000 : 0}`,
 					referee_price: `${arbitro ? 15000 : 0}`,
-					precio_final: `${polera + pelota + arbitro + 20000}`,
+					precio_final: `${(polera ? 3000 : 0) + (pelota ? 2000 : 0) + (arbitro ? 15000 : 0) + 20000}`,
 					complex_mail: store.complejo.email,
 					complex_phone: store.complejo.phone,
 					user_mail: store.logedUser.email,
@@ -54,6 +54,17 @@ export const ReservationFields = () => {
 					console.log(error.text);
 				}
 			);
+	}
+	function handleChange(event) {
+		const input = event.target;
+		const value = input.type === "checkbox" ? input.checked : input.value;
+		if (event.target.id == "polera") {
+			setPolera(value);
+		} else if (event.target.id == "pelota") {
+			setPelota(value);
+		} else {
+			setArbitro(value);
+		}
 	}
 
 	return (
@@ -82,17 +93,35 @@ export const ReservationFields = () => {
 						</article>
 						<article className="col-12 col-md-6">
 							<div className="contenedor_amarillo">
-								<h5 className="mb-3">Seleccione accesorios</h5>
+								<h5 className="mb-3">Servicios Adicionales</h5>
 								<div className="row justify-content-center">
-									<input type="checkbox" id="arbitro" className="mr-2" />
-									<h6>Arbitro</h6>
+									<input
+										name="arbitro"
+										checked={arbitro}
+										onChange={e => handleChange(e)}
+										type="checkbox"
+										id="arbitro"
+									/>
+									<h6>Árbitro</h6>
 								</div>
 								<div className="row justify-content-center">
-									<input type="checkbox" id="arbitro" className="mr-2" />
+									<input
+										name="polera"
+										checked={polera}
+										onChange={e => handleChange(e)}
+										type="checkbox"
+										id="polera"
+									/>
 									<h6>Camiseta</h6>
 								</div>
 								<div className="row justify-content-center">
-									<input type="checkbox" id="arbitro" className="mr-2" />
+									<input
+										name="pelota"
+										checked={pelota}
+										onChange={e => handleChange(e)}
+										type="checkbox"
+										id="pelota"
+									/>
 									<h6>Balon</h6>
 								</div>
 							</div>
