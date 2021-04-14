@@ -5,49 +5,49 @@ import logo from "/workspace/canchapp2/src/front/img/logo_navbar.png";
 
 export const Footer = () => {
 	return (
-		<footer className="text-center text-white bg-warning">
-			<div className="row">
-				<div className="contact-footer text-dark col-4">
-					<p>Contáctanos</p>
-					<p>Email: pichangapp@app.com</p>
-					<p>Tel: 555-44-22</p>
-				</div>
-				<div className="iconos-rrss col-4">
-					<div className="container pt-4">
-						<section className=" iconos mb-4">
-							<a
-								className="btn-face btn btn-link btn-floating btn-lg text-dark m-1"
-								href="https://www.facebook.com/"
-								role="button"
-								data-mdb-ripple-color="dark">
-								<i className="fab fa-facebook-f" />
-							</a>
+		<>
+			<footer className="bg-warning text-white py-5 mb-0 pb-0">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-3 text-white text-uppercase d-flex justify-content-center">
+							<p className="p_footer text-capitalize align-text-bottom">contacto: info@pichangapp.cl</p>
+						</div>
 
-							<a
-								className="btn-twitter btn btn-link btn-floating btn-lg text-dark m-1"
-								href="https://twitter.com/?lang=es"
-								role="button"
-								data-mdb-ripple-color="dark">
-								<i className="fab fa-twitter" />
-							</a>
+						<div className="col-md-6 text-white text-uppercase d-flex justify-content-center">
+							<section className="mb-4">
+								<a
+									className="btn btn-outline-light btn-floating m-1 align-middle"
+									href="#!"
+									role="button">
+									<i className="fab fa-facebook-f" />
+								</a>
 
-							<a
-								className="btn-insta btn btn-link btn-floating btn-lg text-dark m-1"
-								href="https://www.instagram.com/?hl=es"
-								role="button"
-								data-mdb-ripple-color="dark">
-								<i className="fab fa-instagram" />
-							</a>
-						</section>
-						<div className="text-center text-dark p-3">© 2021 Copyright: Pichangapp</div>
+								<a
+									className="btn btn-outline-light btn-floating m-1 align-middle"
+									href="#!"
+									role="button">
+									<i className="fab fa-google" />
+								</a>
+
+								<a
+									className="btn btn-outline-light btn-floating m-1 align-middle"
+									href="#!"
+									role="button">
+									<i className="fab fa-instagram" />
+								</a>
+							</section>
+						</div>
+						<div className="col-md-3 text-white text-uppercase d-flex align-items-center justify-content-center">
+							<img
+								src={logo}
+								width="90px"
+								alt="Logo Pichangapp"
+								className="img-logo mr-2 align-items-center mt-0 pt-0"
+							/>
+						</div>
 					</div>
 				</div>
-				<div className="logo-footer col-4">
-					<Link className=" logo-footer navbar-brand" to="/">
-						<img src={logo} alt="" width="150" height="80" />
-					</Link>
-				</div>
-			</div>
-		</footer>
+			</footer>
+		</>
 	);
 };
