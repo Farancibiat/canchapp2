@@ -27,7 +27,7 @@ export const Home = () => {
 		<>
 			<ToastContainer />
 			<Header />
-			<Stepper />;
+			<Stepper />
 		</>
 	);
 };

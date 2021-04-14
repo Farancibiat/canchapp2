@@ -1,27 +1,37 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../styles/header.css";
 
 export const Header = () => {
 	const { store, actions } = useContext(Context);
+	const [selRegion, setRegion] = useState(0);
+	const [selComuna, setComuna] = useState(0);
 	const [comunas, setComunas] = useState(["-"]);
-	const [complex, setComplex] = useState(["-"]);
+	const [complejos, setComplex] = useState(["-"]);
 	const [url, setUrl] = useState("");
 
-	function change_commune(event) {
-		const selRegion = event.target.value;
-		if (selRegion != "Región") {
+	// Se usa useEffect para activar useState asociados a selRegion y selComuna, de lo contrario
+	// cambian de valor al segundo llamado de su función y el código falla.
+	useEffect(
+		() => {
+			// action required when a diferent Region it's selected
 			setComunas(store.searchEng[selRegion].communes);
-		}
+
+			// action required when a diferent Commune it's selected
+
+			if (parseInt(selComuna) < store.searchEng[selRegion].communes.length) {
+				setComplex(store.searchEng[selRegion].communes[selComuna].complex);
+			}
+		},
+		[selRegion, selComuna]
+	);
+	function change_commune(event) {
+		setRegion(event.target.value);
 	}
+
 	function change_complex(event) {
-		const selComuna = event.target.value;
-		if (selComuna == "Comuna") {
-			setComplex(["Comuna"]);
-		} else if (selComuna == "Castro") {
-			setComplex(["Donde Manolo", "Sport 7", "Municipal 2"]);
-		}
+		setComuna(event.target.value);
 	}
 	function change_url(e) {
 		const aux = window.location.pathname.split("/");
@@ -37,16 +47,15 @@ export const Header = () => {
 		<div className="fondo_header d-flex">
 			<div className="card text-center formulario w-50 mx-auto my-auto">
 				<form>
-					<div className="form-group mb-0">
+					<div className="form-group mb-0 p-2">
 						<div className="card-body p-3">
 							<div className="row">
-								<div className="col-1" />
-								<div className="col-3 px-1">
+								<div className="col-12 col-sm-4 px-1">
 									<select
 										className="custom-select"
 										id="selectRegion"
+										defaultValue="Región"
 										onChange={e => change_commune(e)}>
-										<option selected>Región</option>
 										{// Renderizado de regiones en Store
 										store.searchEng.map((region, index) => {
 											return (
@@ -57,43 +66,48 @@ export const Header = () => {
 										})}
 									</select>
 								</div>
-								<div className="col-3 px-1">
+								<div className="col-12 col-sm-4 px-1">
 									<select
 										className="custom-select"
 										id="selectComuna"
+										defaultValue="Comuna"
 										onChange={e => change_complex(e)}>
-										<option selected>Comuna</option>
 										{// Renderizado de regiones en Store
 										comunas.map((commune, index) => {
 											return (
-												<option key={index} value={commune}>
-													{commune}
+												<option key={index} value={index}>
+													{commune.name}
 												</option>
 											);
 										})}
 									</select>
 								</div>
-								<div className="col-2 px-1">
-									<select className="custom-select" id="selectCancha" onChange={e => change_url(e)}>
-										<option selected>Cancha</option>
+								<div className="col-12 col-sm-4 px-1">
+									<select
+										className="custom-select"
+										id="selectCancha"
+										defaultValue="Cancha"
+										onChange={e => change_url(e)}>
 										{// Renderizado de complejos(recintos)
-										complex.map((complexName, index) => {
+
+										complejos.map((cancha, index) => {
 											return (
 												<option key={index} value={index}>
-													{complexName}
+													{cancha.name}
 												</option>
 											);
 										})}
 									</select>
 								</div>
-								<div className="col-2 px-0">
+							</div>
+							<div className="row pt-3">
+								<div className="col-12 col-sm-12 px-0">
 									<Link to={`${url}`}>
 										<button type="submit" id="reservePage" className="btn btn-success my-0">
 											Reservar
 										</button>
 									</Link>
 								</div>
-								<div className="col-1" />
 							</div>
 						</div>
 					</div>

@@ -16,7 +16,7 @@ export const NavigationBar = () => {
 			<Navbar bg="warning" expand="lg">
 				<div className="container">
 					<LinkContainer to="/">
-						<Link class="navbar-brand" to="/">
+						<Link className="navbar-brand" to="/">
 							<img src={logo} alt="" width="150" />
 						</Link>
 					</LinkContainer>
