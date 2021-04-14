@@ -1,21 +1,9 @@
 
-footer{
-    height: 10rem;
-}
 
-.btn-face, .btn-twitter, .btn-insta{
-    background-color:#007bff ;
-    width: 4rem;
-    border-radius: 50px;
-}
-
-.logo-footer{
+.p_footer{
+    font-size: 12px;
+    color: white;
     display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem;
-    padding-right: 2rem;
-}
+    align-items: center;
 
-.contact-footer{
-    margin-top: 2rem;
 }
