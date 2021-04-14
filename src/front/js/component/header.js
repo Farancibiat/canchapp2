@@ -1,30 +1,60 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { ToastContainer, toast } from "react-toastify";
 import "../styles/header.css";
 
 export const Header = () => {
 	const { store, actions } = useContext(Context);
+	const [redirect, setRedirect] = useState(null);
 	const [selRegion, setRegion] = useState(0);
 	const [selComuna, setComuna] = useState(0);
+	const [selComplejo, setComplejo] = useState("");
 	const [comunas, setComunas] = useState(["-"]);
 	const [complejos, setComplex] = useState(["-"]);
 	const [url, setUrl] = useState("");
 
 	// Se usa useEffect para activar useState asociados a selRegion y selComuna, de lo contrario
 	// cambian de valor al segundo llamado de su función y el código falla.
+
+	const submitHandler = e => {
+		e.preventDefault();
+		if (selRegion != "Región" && selComuna != "Comuna" && selComplejo != "Cancha" && selComplejo != "") {
+			const aux = window.location.pathname.split("/");
+			if (aux[1] == "reserve") {
+				setUrl(`${selComplejo}`);
+				actions.setComplexId(selComplejo);
+			} else {
+				setUrl(`reserve/${selComplejo}`);
+				actions.setComplexId(selComplejo);
+			}
+			setRedirect(true);
+		} else {
+			toast.error(" ¡Complete los campos correctamente!", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+		}
+	};
 	useEffect(
 		() => {
 			// action required when a diferent Region it's selected
-			setComunas(store.searchEng[selRegion].communes);
+			if (selRegion != "Región") {
+				setComunas(store.searchEng[selRegion].communes);
 
-			// action required when a diferent Commune it's selected
+				// action required when a diferent Commune it's selected
 
-			if (parseInt(selComuna) < store.searchEng[selRegion].communes.length) {
-				setComplex(store.searchEng[selRegion].communes[selComuna].complex);
+				if (parseInt(selComuna) < store.searchEng[selRegion].communes.length) {
+					setComplex(store.searchEng[selRegion].communes[selComuna].complex);
+				}
 			}
 		},
-		[selRegion, selComuna]
+		[selRegion, selComuna, selComplejo]
 	);
 	function change_commune(event) {
 		setRegion(event.target.value);
@@ -34,17 +64,12 @@ export const Header = () => {
 		setComuna(event.target.value);
 	}
 	function change_url(e) {
-		const aux = window.location.pathname.split("/");
-		if (aux[1] == "reserve") {
-			setUrl(`${e.target.value}`);
-			actions.setComplexId(e.target.value);
-		} else {
-			setUrl(`reserve/${e.target.value}`);
-			actions.setComplexId(e.target.value);
-		}
+		setComplejo(e.target.value);
 	}
 	return (
 		<div className="fondo_header d-flex">
+			<ToastContainer />
+			{redirect ? <Redirect to={`${url}`} /> : ""}
 			<div className="card text-center formulario w-50 mx-auto my-auto">
 				<form>
 					<div className="form-group mb-0 p-2">
@@ -56,7 +81,10 @@ export const Header = () => {
 										id="selectRegion"
 										defaultValue="Región"
 										onChange={e => change_commune(e)}>
-										{// Renderizado de regiones en Store
+										<option key="-1" value="Región">
+											Región
+										</option>
+										{// Renderizado de regiones desde Store
 										store.searchEng.map((region, index) => {
 											return (
 												<option key={index} value={index}>
@@ -72,7 +100,10 @@ export const Header = () => {
 										id="selectComuna"
 										defaultValue="Comuna"
 										onChange={e => change_complex(e)}>
-										{// Renderizado de regiones en Store
+										<option key="-1" value="Comuna">
+											Comuna
+										</option>
+										{// Renderizado de comunas desde Store
 										comunas.map((commune, index) => {
 											return (
 												<option key={index} value={index}>
@@ -88,25 +119,31 @@ export const Header = () => {
 										id="selectCancha"
 										defaultValue="Cancha"
 										onChange={e => change_url(e)}>
-										{// Renderizado de complejos(recintos)
-
-										complejos.map((cancha, index) => {
-											return (
-												<option key={index} value={index}>
-													{cancha.name}
-												</option>
-											);
-										})}
+										<option key="-1" value="Cancha">
+											Cancha
+										</option>
+										{// Renderizado de complejos(recintos) desde store
+										complejos[0] != "-"
+											? complejos.map((cancha, index) => {
+													return (
+														<option key={index} value={index}>
+															{cancha.name}
+														</option>
+													);
+											  })
+											: ""}
 									</select>
 								</div>
 							</div>
 							<div className="row pt-3">
 								<div className="col-12 col-sm-12 px-0">
-									<Link to={`${url}`}>
-										<button type="submit" id="reservePage" className="btn btn-success my-0">
-											Reservar
-										</button>
-									</Link>
+									<button
+										type="submit"
+										id="reservePage"
+										className="btn btn-success my-0"
+										onClick={submitHandler}>
+										Reservar
+									</button>
 								</div>
 							</div>
 						</div>
