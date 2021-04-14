@@ -33,24 +33,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			unavailable: [],
 			searchEng: [
 				{
-					name: "Región",
-					communes: [
-						{
-							name: "Comuna",
-							complex: [
-								{
-									name: "Cancha",
-									mail: "",
-									phone: "",
-									rentPrice: 0,
-									ballPrice: 0,
-									refereePrice: 0
-								}
-							]
-						}
-					]
-				},
-				{
 					name: "Arica y Parinacota",
 					communes: [
 						{
