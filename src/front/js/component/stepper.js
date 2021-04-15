@@ -1,11 +1,11 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 
-import Picture from "/workspace/canchapp2/src/front/img/vectorstock_8229541.png";
-import Step1 from "/workspace/canchapp2/src/front/img/step1.jpg";
-import Step2 from "/workspace/canchapp2/src/front/img/step2.jpg";
-import Step3 from "/workspace/canchapp2/src/front/img/step3.jpg";
-import Step4 from "/workspace/canchapp2/src/front/img/step4.jpg";
+import Picture from "../../img/vectorstock_8229541.png";
+import Step1 from "../../img/step1.jpg";
+import Step2 from "../../img/step2.jpg";
+import Step3 from "../../img/step3.jpg";
+import Step4 from "../../img/step4.jpg";
 
 const Stepper = () => {
 	return (
