@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
 
-export const RecoverPass = () => {
+export const RecoverPassword = () => {
 	const { store, actions } = useContext(Context);
 	const [password, setPassword] = useState("");
 
@@ -87,4 +87,4 @@ export const RecoverPass = () => {
 	);
 };
 
-export default RecoverPass;
+export default RecoverPassword;
