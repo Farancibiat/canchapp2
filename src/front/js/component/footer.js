@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../styles/footer.css";
 import { Link } from "react-router-dom";
-import logo from "/workspace/canchapp2/src/front/img/logo_navbar.png";
+import logo from "../../img/logo_navbar.png";
 
 export const Footer = () => {
 	return (
