@@ -316,7 +316,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setRegisterToast: aux => {
 				setStore({ registerToast: aux });
+			},
+
+			validate: mail => {
+				fetch(process.env.BACKEND_URL + "/api/validate", {
+					method: "POST",
+					body: JSON.stringify({ email: mail }),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						if (data.name) {
+							return data;
+						} else {
+							return "Invalid User";
+						}
+						console.log(data);
+					})
+					.catch(error => console.log("Error loading message from backend", error));
 			}
+			// recover: email =>{
+			//     fetch(process.env.BACKEND_URL + '/api/')
+			// }
 		}
 	};
 };

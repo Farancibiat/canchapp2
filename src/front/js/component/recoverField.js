@@ -2,17 +2,52 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
+import emailjs from "emailjs-com";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RecoverField = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 
-	const handlerSubmit = e => {
+	const handlerSubmit = async e => {
 		e.preventDefault();
+		let token = Math.floor(Math.random() * 1000000);
+		let user = await actions.validate(email);
+		if (user == "Invalid User") {
+			toast.error(" Registro Inválido, intente nuevamente", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+		} else {
+			emailjs
+				.send(
+					"pichangapp_s26kmmb",
+					"template_8mtz89o",
+					{
+						user_mail: email,
+						user_name: user.name,
+						token: process.env.BACKEND_URL + "/recover/" + token
+					},
+					"user_F3htLlSg7bVzumwkoOdNw"
+				)
+				.then(
+					result => {
+						console.log(result.text);
+					},
+					error => {
+						console.log("Hubo un error al procesar su solicitud");
+					}
+				);
+		}
 
-		actions.recover({
-			email: email
-		});
+		// actions.recover(
+		//     email
+		// );
 	};
 
 	return (

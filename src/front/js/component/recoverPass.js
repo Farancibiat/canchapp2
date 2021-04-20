@@ -3,13 +3,14 @@ import { Context } from "../store/appContext";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
 
-export const RecoverPassword = () => {
+export const RecoverPass = () => {
 	const { store, actions } = useContext(Context);
-	const [password, setPassword] = useState("");
+	const [pass2, setPass2] = useState("");
+	const [token, setToken] = useState(location.pathname.split("/")[2]);
+	const [pass1, setPass1] = useState("");
 
 	const handlerSubmit = e => {
 		e.preventDefault();
-
 		actions.recoverPass({
 			password: password
 		});
@@ -32,13 +33,19 @@ export const RecoverPassword = () => {
 											<i className="fa fa-lock" />{" "}
 										</span>
 									</div>
+								</div>
+								<div className="input-group form-group">
+									<div className="input-group-prepend">
+										<span className="input-group-text">
+											<i className="fas fa-key" />
+										</span>
+									</div>
 									<input
-										name="Password"
-										value={password}
-										className="form-control"
-										placeholder="Ingresa el código que te enviamos"
 										type="password"
-										onChange={e => setPassword(e.target.value)}
+										value={pass1}
+										className="form-control"
+										placeholder="Contraseña"
+										onChange={e => setPass1(e.target.value)}
 									/>
 								</div>
 								<div className="input-group form-group">
@@ -49,24 +56,10 @@ export const RecoverPassword = () => {
 									</div>
 									<input
 										type="password"
-										value={password}
+										value={pass2}
 										className="form-control"
-										placeholder="Contraseña"
-										onChange={e => setPassword(e.target.value)}
-									/>
-								</div>
-								<div className="input-group form-group">
-									<div className="input-group-prepend">
-										<span className="input-group-text">
-											<i className="fas fa-key" />
-										</span>
-									</div>
-									<input
-										type="password"
-										value={password}
-										className="form-control"
-										placeholder="Contraseña"
-										onChange={e => setPassword(e.target.value)}
+										placeholder="Reingrese Contraseña"
+										onChange={e => setPass2(e.target.value)}
 									/>
 								</div>
 								<div className=" form-group">
@@ -74,12 +67,6 @@ export const RecoverPassword = () => {
 								</div>
 							</form>
 						</div>
-						{/* <div className="card-footer">
-							<div className="d-flex justify-content-center links" />
-							<div className="d-flex justify-content-center">
-								<Link to="#">Olvidaste tu contraseña?</Link>
-							</div>
-						</div> */}
 					</div>
 				</div>
 			</div>
@@ -87,4 +74,4 @@ export const RecoverPassword = () => {
 	);
 };
 
-export default RecoverPassword;
+export default RecoverPass;
