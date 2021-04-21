@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loginToast: false,
 			registerToast: false,
 			token: "",
+			recoveryUser: "",
 
 			logedUser: {
 				firstName: "",
@@ -327,17 +328,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						if (data.name) {
-							return data;
+							console.log("me cago en tu puta madre");
+							setStore({ recoveryUser: data.name });
+							return true;
 						} else {
-							return "Invalid User";
+							console.log("a la mierda!");
+							setStore({ recoveryUser: data.msg });
+							return false;
 						}
-						console.log(data);
 					})
-					.catch(error => console.log("Error loading message from backend", error));
+					.catch(error => {
+						console.log("Error loading message from backend", error);
+						return false;
+					});
 			}
-			// recover: email =>{
-			//     fetch(process.env.BACKEND_URL + '/api/')
-			// }
 		}
 	};
 };

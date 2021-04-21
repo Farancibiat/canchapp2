@@ -1,57 +1,58 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const RecoverField = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
+	const [token, setToken] = useState("");
 
-	const handlerSubmit = async e => {
+	useEffect(() => {}, [toast]);
+	const result = () => {
+		return new Promise(resolve => {
+			actions.validate(email).then(response => resolve(response));
+		});
+	};
+	const handlerSubmit = e => {
 		e.preventDefault();
-		let token = Math.floor(Math.random() * 1000000);
-		let user = await actions.validate(email);
-		if (user == "Invalid User") {
-			toast.error(" Registro Inválido, intente nuevamente", {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined
-			});
-		} else {
-			emailjs
-				.send(
+		setToken(Math.floor(Math.random() * 1000000));
+
+		result().then(response => {
+			console.log(response);
+			if (response) {
+				console.log("entro a emailjs");
+				emailjs.send(
 					"pichangapp_s26kmmb",
 					"template_8mtz89o",
 					{
 						user_mail: email,
-						user_name: user.name,
-						token: process.env.BACKEND_URL + "/recover/" + token
+						user_name: store.recoveryUser,
+						token: "https://3000-apricot-mongoose-dqy31ho2.ws-us03.gitpod.io/recover/" + token
 					},
 					"user_F3htLlSg7bVzumwkoOdNw"
-				)
-				.then(
-					result => {
-						console.log(result.text);
-					},
-					error => {
-						console.log("Hubo un error al procesar su solicitud");
-					}
 				);
-		}
-
-		// actions.recover(
-		//     email
-		// );
+			} else {
+				console.log("entro al toast");
+				toast.error(store.recoveryUser + ", intente nuevamente", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+			}
+		});
 	};
 
 	return (
 		<div className="fondo-login justify-content-center">
+			<ToastContainer />
 			<div className="con1">
 				<div className="d-flex justify-content-center h-100">
 					<div className="card-login rounded-lg">
@@ -78,14 +79,6 @@ export const RecoverField = () => {
 									<input type="submit" value="Enviar" className="btn float-right login_btn" />
 								</div>
 							</form>
-						</div>
-						<div className="card-footer">
-							<div className="d-flex justify-content-center links" />
-							<div className="d-flex justify-content-center">
-								<Link to="/recoverpass" className="text-white">
-									¿Ya tienes código? ingresalo aqui.
-								</Link>
-							</div>
 						</div>
 					</div>
 				</div>
