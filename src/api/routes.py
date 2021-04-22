@@ -5,8 +5,8 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Recinto, Reservas
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
-from werkzeug.security import generate_password_hash
 import datetime
+from random import randint
 
 api = Blueprint('api', __name__)
 
@@ -121,7 +121,7 @@ def get_recinto(id):
   
   
 
-@api.route('/validate', methods=['GET','POST'])
+@api.route('/validate', methods=['POST'])
 def validate():
     email = request.json.get("email", None)
     
@@ -177,7 +177,7 @@ def set_token():
             return "Error try again", 401
 
         selectedUser = User.query.filter_by(email = email).first()
-        selectedUser.password = generate_password_hash(token)  
+        selectedUser.password = randint(100000, 90000000)
         selectedUser.numberToken = token
         db.session.commit()
         response = {

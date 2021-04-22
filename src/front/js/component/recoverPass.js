@@ -4,7 +4,7 @@ import "../styles/login.css";
 import { Link } from "react-router-dom";
 
 export const RecoverPass = () => {
-	const {store, actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	const [pass2, setPass2] = useState("");
 	const [token, setToken] = useState(location.pathname.split("/")[2]);
 	const [pass1, setPass1] = useState("");
