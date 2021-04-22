@@ -357,6 +357,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						console.log(data);
 					});
+			},
+
+			recoverPass: (pass, token) => {
+				fetch(process.env.BACKEND_URL + "/api/modifypass", {
+					method: "POST",
+					body: JSON.stringify({
+						password: pass,
+						numberToken: token
+					}),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log(data);
+					});
 			}
 		}
 	};

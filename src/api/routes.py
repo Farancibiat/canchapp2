@@ -66,9 +66,9 @@ def login():
 
     user = User.query.filter_by(email=email).first()
 
-    if(user.numberToken != 0):
-        return jsonify({"msg": "Forgot your password proccess is incomplete"
-        }), 401
+    # if(user.numberToken != 0):
+    #     return jsonify({"msg": "Forgot your password proccess is incomplete"
+    #     }), 401
 
     if not user:
         return jsonify({"msg": "The email is not correct"
