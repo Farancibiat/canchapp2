@@ -120,6 +120,27 @@ def get_recinto(id):
     return jsonify(response_body), 200
   
   
+
+@api.route('/validate', methods=['GET','POST'])
+def validate():
+    email = request.json.get("email", None)
+    
+
+    if not email:
+        return jsonify({"msg":"Error al validar informacion"}), 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"msg": "Error al validar informacion"
+        }), 400
+
+    response={
+        "name": user.firstName + " " + user.lastName
+    }
+
+    return jsonify(response), 200
+
 @api.route('/modifypass', methods=['POST'])
 def modify_pass():
     
@@ -163,3 +184,4 @@ def set_token():
             "msg": "Token Modificado Successfully"
         }
         return jsonify(response), 200              
+

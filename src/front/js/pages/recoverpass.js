@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { RecoverPassword } from "../component/recoverPass";
+import { RecoverPass } from "../component/recoverPass";
 
-export const Recoverpassword = () => {
+export const Recoverpass = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
 		<div>
-			<RecoverPassword />
+			<RecoverPass />
 		</div>
 	);
 };
 
-export default Recoverpassword;
+export default Recoverpass;
