@@ -11,6 +11,7 @@ class User(db.Model):
     firstName = db.Column(db.String(80), unique=False, nullable=False)
     lastName = db.Column(db.String(80), unique=False, nullable=False)
     phone = db.Column(db.Integer, unique=False, nullable=False)
+    numberToken = db.Column(db.Integer, unique=True, nullable=False)
     
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
