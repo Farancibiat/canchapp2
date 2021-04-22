@@ -4,8 +4,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loginStatus: false,
 			loginToast: false,
 			registerToast: false,
+			recoveryToast: false,
 			token: "",
 			validateState: false,
+			toastMessage: "",
 			recoveryUser: "",
 
 			logedUser: {
@@ -272,26 +274,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ token: data.token });
-						setStore({ logedUser: data.user });
-						setStore({ loginStatus: true });
-						if (rememberMe) {
-							if (typeof Storage !== "undefined") {
-								localStorage.setItem("token", data.token);
-								localStorage.setItem("user", JSON.stringify(data.user));
+						if (data.token) {
+							setStore({ token: data.token });
+							setStore({ logedUser: data.user });
+							setStore({ loginStatus: true });
+							if (rememberMe) {
+								if (typeof Storage !== "undefined") {
+									localStorage.setItem("token", data.token);
+									localStorage.setItem("user", JSON.stringify(data.user));
+								} else {
+									console.log("LocalStorage no soportado en este navegador");
+								}
 							} else {
-								console.log("LocalStorage no soportado en este navegador");
+								if (typeof Storage !== "undefined") {
+									sessionStorage.setItem("token", data.token);
+									sessionStorage.setItem("user", JSON.stringify(data.user));
+								} else {
+									console.log("LocalStorage no soportado en este navegador");
+								}
 							}
-						} else {
-							if (typeof Storage !== "undefined") {
-								sessionStorage.setItem("token", data.token);
-								sessionStorage.setItem("user", JSON.stringify(data.user));
-							} else {
-								console.log("LocalStorage no soportado en este navegador");
-							}
+						} else if (data.msg) {
+							setStore({ toastMessage: data.msg });
 						}
 					})
-					.catch(error => console.log("Error loading message from backend", error));
+					.catch(error => setStore({ toastMessage: "Error loading message from backend" + error }));
 			},
 
 			setComplexId: id => {
@@ -318,6 +324,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setRegisterToast: aux => {
 				setStore({ registerToast: aux });
+			},
+			setRecoveryToast: aux => {
+				setStore({ recoveryToast: aux });
+			},
+			setLoginToast: aux => {
+				setStore({ LoginToast: aux });
 			},
 
 			validate: mail => {

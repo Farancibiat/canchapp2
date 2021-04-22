@@ -29,7 +29,7 @@ export const RecoverField = () => {
 							{
 								user_mail: email,
 								user_name: store.recoveryUser,
-								token: "https://3000-plum-whitefish-bc1yspjy.ws-us03.gitpod.io//recover/" + token
+								token: "https://3000-maroon-thrush-pikf52z8.ws-us03.gitpod.io/recover/" + token
 							},
 							"user_F3htLlSg7bVzumwkoOdNw"
 						)

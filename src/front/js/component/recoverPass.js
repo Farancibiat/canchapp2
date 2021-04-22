@@ -17,6 +17,7 @@ export const RecoverPass = () => {
 		if (pass2 == pass1) {
 			actions.recoverPass(pass2, token);
 			actions.setToast(true);
+			setRedirect(true);
 		} else {
 			toast.error("Las claves ingresadas no son iguales", {
 				position: "top-center",
@@ -33,7 +34,7 @@ export const RecoverPass = () => {
 	return (
 		<div className="fondo-login justify-content-center">
 			<ToastContainer />
-			{redirect ? <Redirect to="/" /> : ""}
+			{redirect ? <Redirect to="/login" /> : ""}
 			<div className="con1">
 				<div className="d-flex justify-content-center h-100">
 					<div className="card-login rounded-lg">

@@ -9,8 +9,8 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	useEffect(() => {
-		if (store.registerToast) {
-			actions.setRegisterToast(false);
+		if (store.LoginToast) {
+			actions.setLoginToast(false);
 			toast.success("¡Login exitoso! ", {
 				position: "top-center",
 				autoClose: 5000,

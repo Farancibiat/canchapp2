@@ -41,7 +41,7 @@ def create_user():
         user.firstName = firstName
         user.lastName = lastName
         user.phone = phone
-        user.numberToken = 0
+        user.securityKey = 0
         # hashed_password = generate_password_hash(password)
         user.password = password
         print(user)
@@ -60,19 +60,19 @@ def login():
     password = request.json.get("password", None)
 
     if not email:
-        return jsonify({"msg":"Email Requerido"}), 400
+        return jsonify({"msg":"Información inválida"}), 200
     if not password:
-            return jsonify({"msg":"Password is required"}), 400
+        return jsonify({"msg":"Información inválida"}), 200
 
     user = User.query.filter_by(email=email).first()
 
-    # if(user.numberToken != 0):
-    #     return jsonify({"msg": "Forgot your password proccess is incomplete"
-    #     }), 401
+    if(user.securityKey != 0):
+        return jsonify({"msg": "Cuenta en proceso de recuperación"
+        }), 200
 
     if not user:
-        return jsonify({"msg": "The email is not correct"
-        }), 401
+        return jsonify({"msg": "Información inválida"
+        }), 200
 
     expiration = datetime.timedelta(days=5)
     access_token = create_access_token(identity=user.email, expires_delta=expiration)
@@ -152,16 +152,15 @@ def modify_pass():
         if not password:
             return "Error try again", 401
 
-        selectedUser = User.query.filter_by(tokenNumber=token).first()
+        selectedUser = User.query.filter_by(securityKey=token).first()
                  
-        selectedUser.numberToken = 0
+        selectedUser.securityKey= 0
         selectedUser.password = password
-        print(user)
+        print(selectedUser)
         db.session.commit()
 
         response = {
-            "msg": "Usuario Modificado Successfully",
-            "name": firstName
+            "msg": "Usuario Modificado Successfully"
         }
         return jsonify(response), 200
 
@@ -178,7 +177,7 @@ def set_token():
 
         selectedUser = User.query.filter_by(email = email).first()
         selectedUser.password = randint(100000, 90000000)
-        selectedUser.numberToken = token
+        selectedUser.securityKey = token
         db.session.commit()
         response = {
             "msg": "Token Modificado Successfully"
