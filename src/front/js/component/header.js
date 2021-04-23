@@ -65,6 +65,31 @@ export const Header = () => {
 				});
 				actions.setCloseSessionToast(false);
 			}
+			actions.setRedirect(false);
+			if (store.validateState == 1) {
+				toast.success("¡Correo enviado exitosamente! ", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setValidateState(0);
+			}
+			if (store.LoginToast) {
+				actions.setLoginToast(false);
+				toast.success("¡Login exitoso! ", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+			}
 		},
 		[selRegion, selComuna, selComplejo, store.closeSessionToast]
 	);
