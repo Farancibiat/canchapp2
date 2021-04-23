@@ -29,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				id: ""
 			},
 			complexId: "",
+			horasReservadas: {},
 			reserve: {
 				reserveId: "",
 				fecha: "",
@@ -402,6 +403,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						console.log(data);
+					});
+			},
+
+			createReserve: (fecha, hour) => {
+				fetch(process.env.BACKEND_URL + "/api/reserva", {
+					method: "POST",
+					body: JSON.stringify({
+						idRecinto: getStore().complexId,
+						horaReserva: hour,
+						diaReserva: fecha
+					}),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data.msg);
+					})
+					.catch(error => {
+						console.log("Error inesperado", error);
+					});
+			},
+
+			loadHorasReservadas: () => {
+				fetch(process.env.BACKEND_URL + `/api/reserva/${getStore().complexId}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data);
+					})
+					.catch(error => {
+						console.log("Error inesperado", error);
 					});
 			}
 		}

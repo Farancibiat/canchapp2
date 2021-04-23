@@ -17,13 +17,23 @@ export const ReservationFields = () => {
 	const [polera, setPolera] = useState(0);
 	const [pelota, setPelota] = useState(0);
 	const [arbitro, setArbitro] = useState(0);
+	const [hour, setHour] = useState(0);
+	const [fecha, setFechaString] = useState("");
+	const array24Horas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
 	useEffect(() => {
 		actions.cargarComplejo();
+		actions.loadHorasReservadas();
 	}, []);
+
+	function setFecha(dia) {
+		setSelectDate(dia);
+		setFechaString(selectDate.getDate() + "/" + selectDate.getMonth() + "/" + selectDate.getFullYear());
+	}
 
 	function sendEmail(e) {
 		e.preventDefault();
+		actions.createReserve(fecha, hour);
 		emailjs
 			.send(
 				"pichangapp_s26kmmb",
@@ -32,8 +42,8 @@ export const ReservationFields = () => {
 					complex_name: store.complejo.nameRecinto,
 					to_name: `${store.logedUser.firstName} ${store.logedUser.lastName}`,
 					id_reserva: store.reserve.reserveId,
-					fecha: "27/05/2021",
-					hora: "21",
+					fecha: fecha,
+					hora: hour,
 					precio: "20000",
 					tshirts_price: `${polera ? 3000 : 0}`,
 					ball_price: `${pelota ? 2000 : 0}`,
@@ -83,12 +93,50 @@ export const ReservationFields = () => {
 								<Datepicker
 									className="fecha"
 									selected={selectDate}
-									onChange={date => setSelectDate(date)}
+									onChange={date => setFecha(date)}
 									dateFormat="dd/MM/yyyy"
 									minDate={new Date()}
 								/>
 								<h6 className="mt-2">Horario</h6>
-								<input type="time" />
+								<select
+									className="custom-select"
+									id="hour"
+									defaultValue="Seleccione Hora"
+									onChange={e => setHour(e.target.value)}>
+									<option key="-1" value="Seleccione Hora">
+										Selecione Hora
+									</option>
+									{() => {
+										if (store.horasReservadas[selectDate]) {
+											array24Horas.map((element, index) => {
+												if (
+													element >= store.complejo.openHour ||
+													element <= store.complejo.closeHour ||
+													store.horasReservadas[fecha].some(elemento => elemento != element)
+												) {
+													return (
+														<option key={index} value={element}>
+															{element}
+														</option>
+													);
+												}
+											});
+										} else {
+											array24hras.map((element, index) => {
+												if (
+													element >= store.complejo.openHour ||
+													element <= store.complejo.closeHour
+												) {
+													return (
+														<option key={index} value={element}>
+															{element}
+														</option>
+													);
+												}
+											});
+										}
+									}}
+								</select>
 							</div>
 						</article>
 						<article className="col-12 col-md-6">
