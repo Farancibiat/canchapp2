@@ -4,9 +4,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			loginStatus: false,
+			// Toast que detona mensaje de login exitoso en home
 			loginToast: false,
+			// Toast que detona mensaje de registro existoso en login
 			registerToast: false,
+			// Toast que detona mensaje de cambio de clave existoso en login
 			recoveryToast: false,
+			// Toast que detona mensaje de error en login cuando falla login
+			mistakenToast: false,
 			token: "",
 			toastMessage: "",
 			recoveryUser: "",
@@ -299,9 +304,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 							}
 						} else if (data.msg) {
 							setStore({ toastMessage: data.msg });
+							setStore({ mistakenToast: true });
 						}
 					})
-					.catch(error => setStore({ toastMessage: "Error loading message from backend" + error }));
+					.catch(error => {
+						setStore({ mistakenToast: true });
+						setStore({ toastMessage: "Error loading message from backend" + error });
+					});
 			},
 
 			setComplexId: id => {

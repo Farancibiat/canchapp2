@@ -37,6 +37,22 @@ export const Login = () => {
 				progress: undefined
 			});
 		}
+		if (store.loginStatus) {
+			actions.setLoginToast(true);
+			setRedirect(true);
+		}
+		if (store.mistakenToast) {
+			toast.error("Error al iniciar sesión, intente nuevamente.", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+			setStore({ mistakenToast: false });
+		}
 	}, []);
 
 	const handlerSubmit = e => {
@@ -49,20 +65,6 @@ export const Login = () => {
 				},
 				remember
 			);
-			if (store.loginStatus) {
-				actions.setLoginToast(true);
-				setRedirect(true);
-			} else {
-				toast.error("Imposible iniciar sesión, intente nuevamente", {
-					position: "top-center",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined
-				});
-			}
 		} else {
 			toast.error(" ¡Complete todos los campos!", {
 				position: "top-center",
@@ -152,4 +154,3 @@ export const Login = () => {
 		</div>
 	);
 };
-// onClick={setRemember(!remember)}

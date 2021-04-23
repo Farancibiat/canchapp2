@@ -25,7 +25,7 @@ export const Account = () => {
 				phone: parseInt(phone),
 				password: password
 			});
-
+			actions.setRegisterToast(true);
 			actions.setToast(true);
 
 			setRedirect(true);

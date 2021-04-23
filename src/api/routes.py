@@ -73,6 +73,10 @@ def login():
     if not user:
         return jsonify({"msg": "Información inválida"
         }), 200
+    if (user.password!=password):
+        return jsonify({"msg":"Información inválida"}), 200
+    
+
 
     expiration = datetime.timedelta(days=5)
     access_token = create_access_token(identity=user.email, expires_delta=expiration)
