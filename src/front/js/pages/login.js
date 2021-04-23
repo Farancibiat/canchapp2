@@ -53,7 +53,7 @@ export const Login = () => {
 				actions.setLoginToast(true);
 				setRedirect(true);
 			} else {
-				toast.error("intente nuevamente", {
+				toast.error("Imposible iniciar sesión, intente nuevamente", {
 					position: "top-center",
 					autoClose: 5000,
 					hideProgressBar: false,

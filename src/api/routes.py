@@ -124,22 +124,28 @@ def get_recinto(id):
 @api.route('/validate', methods=['POST'])
 def validate():
     email = request.json.get("email", None)
-    
+    token = request.json.get("numberToken", None)
 
     if not email:
-        return jsonify({"msg":"Error al validar informacion"}), 400
+        return jsonify({"msg":"Error al validar informacion"}), 201
+    if not token:
+        return jsonify({"msg":"Error al validar informacion"}), 201
 
     user = User.query.filter_by(email=email).first()
 
     if not user:
         return jsonify({"msg": "Error al validar informacion"
-        }), 400
+        }), 201
+
+    user.password = randint(100000, 90000000)
+    user.securityKey = token
+    db.session.commit()
 
     response={
-        "name": user.firstName + " " + user.lastName
+        "name": user.firstName + " " + user.lastName,
+        "msg": "Token Modificado Successfully"
     }
-
-    return jsonify(response), 200
+    return jsonify(response), 201
 
 @api.route('/modifypass', methods=['POST'])
 def modify_pass():
@@ -164,23 +170,21 @@ def modify_pass():
         }
         return jsonify(response), 200
 
-@api.route('/settoken', methods=['POST'])
-def set_token():
+# @api.route('/settoken', methods=['POST'])
+# def set_token():
     
-        token = request.json.get("numberToken", None)
-        email = request.json.get("email", None)
+#         token = request.json.get("numberToken", None)
+#         email = request.json.get("email", None)
         
-        if not token:
-            return "Error try again", 401
-        if not email:
-            return "Error try again", 401
+        
+#         if not email:
+#             return "Error try again", 401
 
-        selectedUser = User.query.filter_by(email = email).first()
-        selectedUser.password = randint(100000, 90000000)
-        selectedUser.securityKey = token
-        db.session.commit()
-        response = {
-            "msg": "Token Modificado Successfully"
-        }
-        return jsonify(response), 200              
+#         selectedUser = User.query.filter_by(email = email).first()
+        
+#         db.session.commit()
+#         response = {
+#             "msg": "Token Modificado Successfully"
+#         }
+#         return jsonify(response), 200              
 
