@@ -16,7 +16,7 @@ export const RecoverPass = () => {
 		e.preventDefault();
 		if (pass2 == pass1) {
 			actions.recoverPass(pass2, token);
-			actions.setToast(true);
+			actions.setRecoveryToast(true);
 			setRedirect(true);
 		} else {
 			toast.error("Las claves ingresadas no son iguales", {

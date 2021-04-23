@@ -67,12 +67,14 @@ def login():
     user = User.query.filter_by(email=email).first()
 
     if(user.securityKey != 0):
-        return jsonify({"msg": "Cuenta en proceso de recuperación"
-        }), 200
+        return jsonify({"msg": "Cuenta en proceso de recuperación"}), 200
 
     if not user:
-        return jsonify({"msg": "Información inválida"
-        }), 200
+        return jsonify({"msg": "Información inválida"}), 200
+    if (user.password!=password):
+        return jsonify({"msg":"Información inválida"}), 200
+    
+
 
     expiration = datetime.timedelta(days=5)
     access_token = create_access_token(identity=user.email, expires_delta=expiration)

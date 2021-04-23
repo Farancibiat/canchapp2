@@ -10,34 +10,64 @@ export const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [remember, setRemember] = useState(false);
-	const [redirect, setRedirect] = useState(null);
 
-	useEffect(() => {
-		if (store.registerToast) {
-			actions.setRegisterToast(false);
-			toast.success("¡Registro exitoso! ", {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined
-			});
-		}
-		if (store.recoveryToast) {
-			actions.setRecoveryToast(false);
-			toast.success("¡Cambio de contraseña exitoso! ", {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined
-			});
-		}
-	}, []);
+	useEffect(
+		() => {
+			if (store.registerToast) {
+				toast.success("¡Registro exitoso! ", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setRegisterToast(false);
+			}
+			if (store.closeSessionToast) {
+				toast.success("¡Seción cerrada con éxito! ", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setCloseSessionToast(false);
+			}
+			if (store.recoveryToast) {
+				toast.success("¡Cambio de contraseña exitoso! ", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setRecoveryToast(false);
+			}
+			if (store.loginStatus) {
+				actions.setLoginToast(true);
+			}
+			if (store.mistakenToast) {
+				console.log("entra enmistakentoastuseffect");
+				toast.error("Error al iniciar sesión, intente nuevamente.", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setMistakenToast(false);
+			}
+		},
+		[store.mistakenToast, store.loginStatus, store.recoveryToast, store.registerToast, store.closeSessionToast]
+	);
 
 	const handlerSubmit = e => {
 		e.preventDefault();
@@ -49,20 +79,6 @@ export const Login = () => {
 				},
 				remember
 			);
-			if (store.loginStatus) {
-				actions.setLoginToast(true);
-				setRedirect(true);
-			} else {
-				toast.error("Imposible iniciar sesión, intente nuevamente", {
-					position: "top-center",
-					autoClose: 5000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined
-				});
-			}
 		} else {
 			toast.error(" ¡Complete todos los campos!", {
 				position: "top-center",
@@ -83,7 +99,7 @@ export const Login = () => {
 
 	return (
 		<div className="fondo-login justify-content-center">
-			{redirect ? <Redirect to="/" /> : ""}
+			{store.redirect ? <Redirect to="/" /> : ""}
 			<ToastContainer />
 			<div className="con1">
 				<div className="d-flex justify-content-center h-100">
@@ -152,4 +168,3 @@ export const Login = () => {
 		</div>
 	);
 };
-// onClick={setRemember(!remember)}

@@ -4,9 +4,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			loginStatus: false,
+			// Toast que detona mensaje de login exitoso en home
 			loginToast: false,
+			// Toast que detona mensaje de registro existoso en login
 			registerToast: false,
+			// Toast que detona mensaje de cambio de clave existoso en login
 			recoveryToast: false,
+			// Toast que detona mensaje de error en login cuando falla login
+			mistakenToast: false,
+			closeSessionToast: false,
+
 			token: "",
 			toastMessage: "",
 			recoveryUser: "",
@@ -241,6 +248,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						id: ""
 					}
 				});
+				setStore({ closeSessionToast: true });
 				localStorage.clear();
 				sessionStorage.clear();
 			},
@@ -297,13 +305,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 									console.log("LocalStorage no soportado en este navegador");
 								}
 							}
+							setStore({ redirect: true });
 						} else if (data.msg) {
+							console.log("entra en no-token");
 							setStore({ toastMessage: data.msg });
+							setStore({ mistakenToast: true });
 						}
 					})
-					.catch(error => setStore({ toastMessage: "Error loading message from backend" + error }));
+					.catch(error => {
+						console.log("entra en catch");
+						setStore({ mistakenToast: true });
+						setStore({ toastMessage: "Error loading message from backend" + error });
+					});
 			},
-
+			setMistakenToast: value => setStore({ mistakenToast: value }),
 			setComplexId: id => {
 				setStore({ complexId: id });
 			},
@@ -324,6 +339,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setToast: aux => {
 				setStore({ loginToast: aux });
+			},
+			setCloseSessionToast: aux => {
+				setStore({ closeSessionToast: aux });
 			},
 
 			setRegisterToast: aux => {
@@ -358,7 +376,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								{
 									user_mail: mail,
 									user_name: data.name,
-									token: "https://3000-maroon-thrush-pikf52z8.ws-us03.gitpod.io/recover/" + token
+									token: "https://3000-white-wildebeest-iz4rsk82.ws-us03.gitpod.io/recover/" + token
 								},
 								"user_F3htLlSg7bVzumwkoOdNw"
 							);
