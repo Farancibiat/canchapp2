@@ -1,22 +1,58 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../styles/login.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RecoverField = () => {
 	const { store, actions } = useContext(Context);
 	const [email, setEmail] = useState("");
 
+	useEffect(
+		() => {
+			if (store.validateState == 1) {
+				actions.setRedirect(true);
+			}
+
+			if (store.validateState == 2) {
+				toast.error("Error intente nuevamente", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setValidateState(0);
+			}
+			if (store.validateState == 3) {
+				toast.error("Error de conexión con servidor", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setValidateState(0);
+			}
+		},
+		[store.validateState]
+	);
+
 	const handlerSubmit = e => {
 		e.preventDefault();
-
-		actions.recover({
-			email: email
-		});
+		actions.validate(email);
 	};
 
 	return (
 		<div className="fondo-login justify-content-center">
+			<ToastContainer />
+			{store.redirect ? <Redirect to="/" /> : ""}
 			<div className="con1">
 				<div className="d-flex justify-content-center h-100">
 					<div className="card-login rounded-lg">
@@ -43,14 +79,6 @@ export const RecoverField = () => {
 									<input type="submit" value="Enviar" className="btn float-right login_btn" />
 								</div>
 							</form>
-						</div>
-						<div className="card-footer">
-							<div className="d-flex justify-content-center links" />
-							<div className="d-flex justify-content-center">
-								<Link to="/recoverpass" className="text-white">
-									¿Ya tienes código? ingresalo aqui.
-								</Link>
-							</div>
 						</div>
 					</div>
 				</div>

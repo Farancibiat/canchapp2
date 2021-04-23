@@ -1,22 +1,40 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../styles/login.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export const RecoverPassword = () => {
+export const RecoverPass = () => {
 	const { store, actions } = useContext(Context);
-	const [password, setPassword] = useState("");
+	const [pass2, setPass2] = useState("");
+	const [token, setToken] = useState(location.pathname.split("/")[2]);
+	const [pass1, setPass1] = useState("");
+	const [redirect, setRedirect] = useState(false);
 
 	const handlerSubmit = e => {
 		e.preventDefault();
-
-		actions.recoverPass({
-			password: password
-		});
+		if (pass2 == pass1) {
+			actions.recoverPass(pass2, token);
+			actions.setToast(true);
+			setRedirect(true);
+		} else {
+			toast.error("Las claves ingresadas no son iguales", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+		}
 	};
 
 	return (
 		<div className="fondo-login justify-content-center">
+			<ToastContainer />
+			{redirect ? <Redirect to="/login" /> : ""}
 			<div className="con1">
 				<div className="d-flex justify-content-center h-100">
 					<div className="card-login rounded-lg">
@@ -25,20 +43,18 @@ export const RecoverPassword = () => {
 						</div>
 						<div className="card-body">
 							<form onSubmit={e => handlerSubmit(e)}>
-								<div className="form-group input-group">
+								<div className="input-group form-group">
 									<div className="input-group-prepend">
 										<span className="input-group-text">
-											{" "}
-											<i className="fa fa-lock" />{" "}
+											<i className="fas fa-key" />
 										</span>
 									</div>
 									<input
-										name="Password"
-										value={password}
-										className="form-control"
-										placeholder="Ingresa el código que te enviamos"
 										type="password"
-										onChange={e => setPassword(e.target.value)}
+										value={pass1}
+										className="form-control"
+										placeholder="Contraseña"
+										onChange={e => setPass1(e.target.value)}
 									/>
 								</div>
 								<div className="input-group form-group">
@@ -49,24 +65,10 @@ export const RecoverPassword = () => {
 									</div>
 									<input
 										type="password"
-										value={password}
+										value={pass2}
 										className="form-control"
-										placeholder="Contraseña"
-										onChange={e => setPassword(e.target.value)}
-									/>
-								</div>
-								<div className="input-group form-group">
-									<div className="input-group-prepend">
-										<span className="input-group-text">
-											<i className="fas fa-key" />
-										</span>
-									</div>
-									<input
-										type="password"
-										value={password}
-										className="form-control"
-										placeholder="Contraseña"
-										onChange={e => setPassword(e.target.value)}
+										placeholder="Reingrese Contraseña"
+										onChange={e => setPass2(e.target.value)}
 									/>
 								</div>
 								<div className=" form-group">
@@ -74,12 +76,6 @@ export const RecoverPassword = () => {
 								</div>
 							</form>
 						</div>
-						{/* <div className="card-footer">
-							<div className="d-flex justify-content-center links" />
-							<div className="d-flex justify-content-center">
-								<Link to="#">Olvidaste tu contraseña?</Link>
-							</div>
-						</div> */}
 					</div>
 				</div>
 			</div>
@@ -87,4 +83,4 @@ export const RecoverPassword = () => {
 	);
 };
 
-export default RecoverPassword;
+export default RecoverPass;

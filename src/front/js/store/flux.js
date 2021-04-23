@@ -1,10 +1,18 @@
+import emailjs from "emailjs-com";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			loginStatus: false,
 			loginToast: false,
 			registerToast: false,
+			recoveryToast: false,
 			token: "",
+			toastMessage: "",
+			recoveryUser: "",
+			validateState: 0,
+
+			redirect: false,
 
 			logedUser: {
 				firstName: "",
@@ -270,26 +278,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ token: data.token });
-						setStore({ logedUser: data.user });
-						setStore({ loginStatus: true });
-						if (rememberMe) {
-							if (typeof Storage !== "undefined") {
-								localStorage.setItem("token", data.token);
-								localStorage.setItem("user", JSON.stringify(data.user));
+						if (data.token) {
+							setStore({ token: data.token });
+							setStore({ logedUser: data.user });
+							setStore({ loginStatus: true });
+							if (rememberMe) {
+								if (typeof Storage !== "undefined") {
+									localStorage.setItem("token", data.token);
+									localStorage.setItem("user", JSON.stringify(data.user));
+								} else {
+									console.log("LocalStorage no soportado en este navegador");
+								}
 							} else {
-								console.log("LocalStorage no soportado en este navegador");
+								if (typeof Storage !== "undefined") {
+									sessionStorage.setItem("token", data.token);
+									sessionStorage.setItem("user", JSON.stringify(data.user));
+								} else {
+									console.log("LocalStorage no soportado en este navegador");
+								}
 							}
-						} else {
-							if (typeof Storage !== "undefined") {
-								sessionStorage.setItem("token", data.token);
-								sessionStorage.setItem("user", JSON.stringify(data.user));
-							} else {
-								console.log("LocalStorage no soportado en este navegador");
-							}
+						} else if (data.msg) {
+							setStore({ toastMessage: data.msg });
 						}
 					})
-					.catch(error => console.log("Error loading message from backend", error));
+					.catch(error => setStore({ toastMessage: "Error loading message from backend" + error }));
 			},
 
 			setComplexId: id => {
@@ -316,9 +328,65 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			setRegisterToast: aux => {
 				setStore({ registerToast: aux });
+			},
+			setRecoveryToast: aux => {
+				setStore({ recoveryToast: aux });
+			},
+			setLoginToast: aux => {
+				setStore({ LoginToast: aux });
+			},
+			setRedirect: value => setStore({ redirect: value }),
+
+			setValidateState: state => setStore({ validateState: state }),
+
+			validate: mail => {
+				let token = 1000000 + Math.floor(Math.random() * 9000000);
+				fetch(process.env.BACKEND_URL + "/api/validate", {
+					method: "POST",
+					body: JSON.stringify({
+						email: mail,
+						numberToken: token
+					}),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						if (data.msg == "Token Modificado Successfully") {
+							emailjs.send(
+								"pichangapp_s26kmmb",
+								"template_8mtz89o",
+								{
+									user_mail: mail,
+									user_name: data.name,
+									token: "https://3000-maroon-thrush-pikf52z8.ws-us03.gitpod.io/recover/" + token
+								},
+								"user_F3htLlSg7bVzumwkoOdNw"
+							);
+							setStore({ validateState: 1 });
+						} else {
+							setStore({ validateState: 2 });
+						}
+					})
+					.catch(error => {
+						setStore({ validateState: 3 });
+					});
+			},
+
+			recoverPass: (pass, token) => {
+				fetch(process.env.BACKEND_URL + "/api/modifypass", {
+					method: "POST",
+					body: JSON.stringify({
+						password: pass,
+						numberToken: token
+					}),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						console.log(data);
+					});
 			}
 		}
 	};
 };
-
 export default getState;

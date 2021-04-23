@@ -11,6 +11,7 @@ class User(db.Model):
     firstName = db.Column(db.String(80), unique=False, nullable=False)
     lastName = db.Column(db.String(80), unique=False, nullable=False)
     phone = db.Column(db.Integer, unique=False, nullable=False)
+    securityKey = db.Column(db.Integer, unique=False, nullable=False)
     
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
@@ -34,7 +35,7 @@ class Recinto(db.Model):
     openHour= db.Column(db.Integer, unique=False, nullable=False)
     closeHour= db.Column(db.Integer, unique=False, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    phone = db.Column(db.Integer, unique=False, nullable=False)
+    phone = db.Column(db.Integer, unique=True, nullable=False)
     
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
    

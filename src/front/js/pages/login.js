@@ -13,9 +13,21 @@ export const Login = () => {
 	const [redirect, setRedirect] = useState(null);
 
 	useEffect(() => {
-		if (store.loginToast) {
-			actions.setToast(false);
+		if (store.registerToast) {
+			actions.setRegisterToast(false);
 			toast.success("¡Registro exitoso! ", {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined
+			});
+		}
+		if (store.recoveryToast) {
+			actions.setRecoveryToast(false);
+			toast.success("¡Cambio de contraseña exitoso! ", {
 				position: "top-center",
 				autoClose: 5000,
 				hideProgressBar: false,
@@ -37,8 +49,20 @@ export const Login = () => {
 				},
 				remember
 			);
-			actions.setRegisterToast(true);
-			setRedirect(true);
+			if (store.loginStatus) {
+				actions.setLoginToast(true);
+				setRedirect(true);
+			} else {
+				toast.error("Imposible iniciar sesión, intente nuevamente", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+			}
 		} else {
 			toast.error(" ¡Complete todos los campos!", {
 				position: "top-center",
