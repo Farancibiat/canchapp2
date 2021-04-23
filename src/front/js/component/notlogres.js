@@ -2,9 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import Cancha from "../../img/img_reserva.jpg";
 import { LinkContainer } from "react-router-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
+import { Context } from "../store/appContext";
 import "react-toastify/dist/ReactToastify.css";
 
 export const NotLogRes = () => {
+	const { store, actions } = useContext(Context);
 	useEffect(
 		() => {
 			if (store.closeSessionToast) {
