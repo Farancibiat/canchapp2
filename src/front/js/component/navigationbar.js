@@ -4,6 +4,7 @@ import "../styles/navigationbar.css";
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+
 import { LinkContainer } from "react-router-bootstrap";
 
 export const NavigationBar = () => {
@@ -11,6 +12,7 @@ export const NavigationBar = () => {
 	function cerrarSesion() {
 		actions.cerrarSesion();
 	}
+
 	return (
 		<>
 			<Navbar bg="warning" expand="lg">

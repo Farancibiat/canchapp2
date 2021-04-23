@@ -53,8 +53,20 @@ export const Header = () => {
 					setComplex(store.searchEng[selRegion].communes[selComuna].complex);
 				}
 			}
+			if (store.closeSessionToast) {
+				toast.success("¡Seción cerrada con éxito! ", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setCloseSessionToast(false);
+			}
 		},
-		[selRegion, selComuna, selComplejo]
+		[selRegion, selComuna, selComplejo, store.closeSessionToast]
 	);
 	function change_commune(event) {
 		setRegion(event.target.value);

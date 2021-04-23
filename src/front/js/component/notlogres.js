@@ -1,12 +1,27 @@
-// import Tools
-import React, { useState, useContext } from "react";
-
-// import images
+import React, { useState, useContext, useEffect } from "react";
 import Cancha from "../../img/img_reserva.jpg";
 import { LinkContainer } from "react-router-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const NotLogRes = () => {
-	const [selectDate, setSelectDate] = useState(null);
+	useEffect(
+		() => {
+			if (store.closeSessionToast) {
+				toast.success("¡Seción cerrada con éxito! ", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setCloseSessionToast(false);
+			}
+		},
+		[store.closeSessionToast]
+	);
 	return (
 		<div className="container">
 			<div className="row mt-3">
