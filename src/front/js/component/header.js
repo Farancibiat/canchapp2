@@ -46,6 +46,7 @@ export const Header = () => {
 			// action required when a diferent Region it's selected
 			if (selRegion != "Región") {
 				setComunas(store.searchEng[selRegion].communes);
+				actions.setComplexId("");
 
 				// action required when a diferent Commune it's selected
 
@@ -53,8 +54,21 @@ export const Header = () => {
 					setComplex(store.searchEng[selRegion].communes[selComuna].complex);
 				}
 			}
+			if (store.reservationToast) {
+				toast.success("¡Reserva exitosa! Revisa tu correo ", {
+					position: "top-center",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined
+				});
+				actions.setReservationToast(false);
+			}
+
 			if (store.closeSessionToast) {
-				toast.success("¡Seción cerrada con éxito! ", {
+				toast.success("¡Sesión cerrada con éxito! ", {
 					position: "top-center",
 					autoClose: 5000,
 					hideProgressBar: false,

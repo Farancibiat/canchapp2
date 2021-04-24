@@ -12,6 +12,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			recoveryToast: false,
 			// Toast que detona mensaje de error en login cuando falla login
 			mistakenToast: false,
+			// Toast que detona mensaje de reserva exitosa
+			reservationToast: false,
+
 			closeSessionToast: false,
 
 			token: "",
@@ -29,6 +32,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				id: ""
 			},
 			complexId: "",
+			horasReservadas: { "01/01/0001": [0] },
+			selectDate: new Date(),
 			reserve: {
 				reserveId: "",
 				fecha: "",
@@ -39,7 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			complejo: {
 				id: 0,
-				nameRecinto: "404, complejo no econtrado",
+				nameRecinto: "Cargando Complejo...",
 				openHour: 0,
 				closeHour: 0,
 				email: "",
@@ -335,13 +340,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							complejo: response.recintos
 						});
+						getActions().loadHorasReservadas();
 					});
+			},
+			setSelectDate: aux => {
+				setStore({ selectDate: aux });
 			},
 			setToast: aux => {
 				setStore({ loginToast: aux });
 			},
 			setCloseSessionToast: aux => {
 				setStore({ closeSessionToast: aux });
+			},
+			setReservationToast: aux => {
+				setStore({ reservationToast: aux });
 			},
 
 			setRegisterToast: aux => {
@@ -402,6 +414,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						console.log(data);
+					});
+			},
+
+			createReserve: (fecha, hour) => {
+				console.log(getStore().complexId);
+				fetch(process.env.BACKEND_URL + "/api/reserva", {
+					method: "POST",
+					body: JSON.stringify({
+						idRecinto: getStore().complexId,
+						horaReserva: hour,
+						diaReserva: fecha
+					}),
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data.msg);
+					})
+					.catch(error => {
+						console.log("Error inesperado", error);
+					});
+			},
+
+			loadHorasReservadas: () => {
+				fetch(process.env.BACKEND_URL + `/api/reserva/${getStore().complexId}`, {
+					method: "GET",
+					headers: { "Content-type": "application/json" }
+				})
+					.then(response => response.json())
+					.then(data => {
+						setStore({ horasReservadas: data });
+					})
+					.catch(error => {
+						console.log("Error inesperado", error);
 					});
 			}
 		}
