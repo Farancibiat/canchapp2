@@ -137,15 +137,6 @@ export const Account = () => {
 								onChange={e => setPassword(e.target.value)}
 							/>
 						</div>
-						{/* <div className="form-group input-group">
-							<div className="input-group-prepend">
-								<span className="input-group-text">
-									{" "}
-									<i className="fa fa-lock" />{" "}
-								</span>
-							</div>
-							<input className="form-control" placeholder="Repite tu Contraseña" type="password" />
-						</div> */}
 						<div className="form-group">
 							<button type="submit" className="btn btn-primary btn-block" onClick={handleSubmit}>
 								Crear Cuenta

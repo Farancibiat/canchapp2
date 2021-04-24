@@ -146,7 +146,7 @@ export const Login = () => {
 											type="checkbox"
 											id="RememberMe"
 										/>
-										<p>Recordar contraseña</p>
+										<p>Mantener sesión activa</p>
 									</div>
 								</div>
 								<div className=" form-group pb-3">

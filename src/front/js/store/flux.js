@@ -29,7 +29,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				id: ""
 			},
 			complexId: "",
-			horasReservadas: {},
+			horasReservadas: { "01/01/0001": [0] },
+			selectDate: new Date(),
 			reserve: {
 				reserveId: "",
 				fecha: "",
@@ -40,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			complejo: {
 				id: 0,
-				nameRecinto: "404, complejo no econtrado",
+				nameRecinto: "Cargando Complejo...",
 				openHour: 0,
 				closeHour: 0,
 				email: "",
@@ -336,7 +337,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							complejo: response.recintos
 						});
+						getActions().loadHorasReservadas();
 					});
+			},
+			setSelectDate: aux => {
+				setStore({ selectDate: aux });
 			},
 			setToast: aux => {
 				setStore({ loginToast: aux });
@@ -407,6 +412,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createReserve: (fecha, hour) => {
+				console.log(getStore().complexId);
 				fetch(process.env.BACKEND_URL + "/api/reserva", {
 					method: "POST",
 					body: JSON.stringify({
@@ -432,7 +438,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(response => response.json())
 					.then(data => {
-						console.log(data);
+						setStore({ horasReservadas: data });
 					})
 					.catch(error => {
 						console.log("Error inesperado", error);

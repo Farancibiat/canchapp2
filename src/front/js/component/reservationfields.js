@@ -3,6 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import Datepicker from "react-datepicker";
 import emailjs from "emailjs-com";
+import { Link, Redirect } from "react-router-dom";
 
 // import css
 import "../styles/agendar.css";
@@ -13,7 +14,6 @@ import Cancha from "../../img/img_reserva.jpg";
 
 export const ReservationFields = () => {
 	const { store, actions } = useContext(Context);
-	const [selectDate, setSelectDate] = useState(null);
 	const [polera, setPolera] = useState(0);
 	const [pelota, setPelota] = useState(0);
 	const [arbitro, setArbitro] = useState(0);
@@ -21,18 +21,35 @@ export const ReservationFields = () => {
 	const [fecha, setFechaString] = useState("");
 	const array24Horas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
-	useEffect(() => {
-		actions.cargarComplejo();
-		actions.loadHorasReservadas();
-	}, []);
+	useEffect(
+		() => {
+			if (store.complexId != "") {
+				actions.cargarComplejo();
+			}
+			if (store.selectDate.getMonth < 10) {
+				setFechaString(
+					store.selectDate.getDate() +
+						"/0" +
+						(store.selectDate.getMonth() + 1) +
+						"/" +
+						store.selectDate.getFullYear()
+				);
+			} else {
+				setFechaString(
+					store.selectDate.getDate() +
+						"/0" +
+						(store.selectDate.getMonth() + 1) +
+						"/" +
+						store.selectDate.getFullYear()
+				);
+			}
+		},
+		[store.selectDate]
+	);
 
-	function setFecha(dia) {
-		setSelectDate(dia);
-		setFechaString(selectDate.getDate() + "/" + selectDate.getMonth() + "/" + selectDate.getFullYear());
-	}
-
-	function sendEmail(e) {
+	function handlerSubmit(e) {
 		e.preventDefault();
+		console.log("fecha: " + fecha, "hour: " + hour);
 		actions.createReserve(fecha, hour);
 		emailjs
 			.send(
@@ -56,14 +73,7 @@ export const ReservationFields = () => {
 				},
 				"user_F3htLlSg7bVzumwkoOdNw"
 			)
-			.then(
-				result => {
-					console.log(result.text);
-				},
-				error => {
-					console.log(error.text);
-				}
-			);
+			.then(actions.setRedirect(true));
 	}
 	function handleChange(event) {
 		const input = event.target;
@@ -80,20 +90,21 @@ export const ReservationFields = () => {
 	return (
 		<>
 			<div className="container text-center d-flex flex-column justify-content-center my-5">
+				{store.redirect ? <Redirect to="/" /> : ""}
 				<h5 className="display-4 lead encabezado_pichanga">Reserva tu cancha</h5>
 				<p className="lead">
 					Selecciona la fecha, horario y si necesitas algún accesorio, puedes selecionarlo:
 				</p>
 
-				<form onSubmit={sendEmail}>
+				<form onSubmit={handlerSubmit}>
 					<div className="row">
 						<article className="col-12 col-md-6">
 							<div className="contenedor_verde">
 								<h5>Selecciona la fecha:</h5>
 								<Datepicker
 									className="fecha"
-									selected={selectDate}
-									onChange={date => setFecha(date)}
+									selected={store.selectDate}
+									onChange={date => actions.setSelectDate(date)}
 									dateFormat="dd/MM/yyyy"
 									minDate={new Date()}
 								/>
@@ -106,36 +117,33 @@ export const ReservationFields = () => {
 									<option key="-1" value="Seleccione Hora">
 										Selecione Hora
 									</option>
-									{() => {
-										if (store.horasReservadas[selectDate]) {
-											array24Horas.map((element, index) => {
+									{store.horasReservadas[fecha]
+										? array24Horas.map((element, index) => {
 												if (
-													element >= store.complejo.openHour ||
-													element <= store.complejo.closeHour ||
-													store.horasReservadas[fecha].some(elemento => elemento != element)
+													element >= store.complejo["openHour"] &&
+													element <= store.complejo["closeHour"] &&
+													!store.horasReservadas[fecha].some(elemento => elemento == element)
 												) {
 													return (
 														<option key={index} value={element}>
 															{element}
+															:00
 														</option>
 													);
 												}
-											});
-										} else {
-											array24hras.map((element, index) => {
+										  })
+										: array24Horas.map((element, index) => {
 												if (
-													element >= store.complejo.openHour ||
-													element <= store.complejo.closeHour
+													element >= store.complejo["openHour"] &&
+													element <= store.complejo["closeHour"]
 												) {
 													return (
 														<option key={index} value={element}>
-															{element}
+															{element} :00
 														</option>
 													);
 												}
-											});
-										}
-									}}
+										  })}
 								</select>
 							</div>
 						</article>

@@ -46,6 +46,7 @@ export const Header = () => {
 			// action required when a diferent Region it's selected
 			if (selRegion != "Región") {
 				setComunas(store.searchEng[selRegion].communes);
+				actions.setComplexId("");
 
 				// action required when a diferent Commune it's selected
 
