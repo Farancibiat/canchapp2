@@ -1,4 +1,8 @@
-
+.fondo{
+    background-image: url(../../img/fondo_reserva.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .agendamiento{
     display: flex;
 }
@@ -23,14 +27,14 @@
 }
 
 .contenedor_verde{
+    -webkit-box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
+    -moz-box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
+    box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
+    height: 278px;
     margin: 5px;
     padding: 30px;
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
+    
     background-color: #26a514;
     color: white;
     font-family: 'Pacifico', cursive;
@@ -39,11 +43,25 @@
         text-align: center;
     }
 }
-.contenedor_amarillo{
+.contenedor-azul{
+    -webkit-box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
+    -moz-box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
+    box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
     margin: 5px;
-    padding: 35px;
+    padding: 30px;
     border-radius: 15px;
-    justify-content: center;
+    color: white;
+    font-family: 'Pacifico', cursive;
+}
+.contenedor_amarillo{
+    -webkit-box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
+    -moz-box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
+    box-shadow: -1px 3px 22px -6px rgba(102,102,102,1);
+    margin: 5px;
+    padding: 30px;
+    border-radius: 15px;
+    height: 278px;
+    
     background-color: #ffd200;
     color: darkgreen;
     font-family: 'Pacifico', cursive;

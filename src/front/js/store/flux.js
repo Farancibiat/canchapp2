@@ -12,6 +12,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			recoveryToast: false,
 			// Toast que detona mensaje de error en login cuando falla login
 			mistakenToast: false,
+			// Toast que detona mensaje de reserva exitosa
+			reservationToast: false,
+
 			closeSessionToast: false,
 
 			token: "",
@@ -348,6 +351,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setCloseSessionToast: aux => {
 				setStore({ closeSessionToast: aux });
+			},
+			setReservationToast: aux => {
+				setStore({ reservationToast: aux });
 			},
 
 			setRegisterToast: aux => {

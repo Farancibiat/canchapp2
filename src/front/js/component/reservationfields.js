@@ -9,9 +9,6 @@ import { Link, Redirect } from "react-router-dom";
 import "../styles/agendar.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-// import images
-import Cancha from "../../img/img_reserva.jpg";
-
 export const ReservationFields = () => {
 	const { store, actions } = useContext(Context);
 	const [polera, setPolera] = useState(0);
@@ -73,7 +70,7 @@ export const ReservationFields = () => {
 				},
 				"user_F3htLlSg7bVzumwkoOdNw"
 			)
-			.then(actions.setRedirect(true));
+			.then(actions.setReservationToast(true), actions.setRedirect(true));
 	}
 	function handleChange(event) {
 		const input = event.target;
@@ -89,111 +86,170 @@ export const ReservationFields = () => {
 
 	return (
 		<>
-			<div className="container text-center d-flex flex-column justify-content-center my-5">
+			<div className="fondo text-center d-flex flex-column justify-content-center">
 				{store.redirect ? <Redirect to="/" /> : ""}
-				<h5 className="display-4 lead encabezado_pichanga">Reserva tu cancha</h5>
-				<p className="lead">
-					Selecciona la fecha, horario y si necesitas algún accesorio, puedes selecionarlo:
-				</p>
-
-				<form onSubmit={handlerSubmit}>
-					<div className="row">
-						<article className="col-12 col-md-6">
-							<div className="contenedor_verde">
-								<h5>Selecciona la fecha:</h5>
-								<Datepicker
-									className="fecha"
-									selected={store.selectDate}
-									onChange={date => actions.setSelectDate(date)}
-									dateFormat="dd/MM/yyyy"
-									minDate={new Date()}
-								/>
-								<h6 className="mt-2">Horario</h6>
-								<select
-									className="custom-select"
-									id="hour"
-									defaultValue="Seleccione Hora"
-									onChange={e => setHour(e.target.value)}>
-									<option key="-1" value="Seleccione Hora">
-										Selecione Hora
-									</option>
-									{store.horasReservadas[fecha]
-										? array24Horas.map((element, index) => {
-												if (
-													element >= store.complejo["openHour"] &&
-													element <= store.complejo["closeHour"] &&
-													!store.horasReservadas[fecha].some(elemento => elemento == element)
-												) {
-													return (
-														<option key={index} value={element}>
-															{element}
-															:00
-														</option>
-													);
-												}
-										  })
-										: array24Horas.map((element, index) => {
-												if (
-													element >= store.complejo["openHour"] &&
-													element <= store.complejo["closeHour"]
-												) {
-													return (
-														<option key={index} value={element}>
-															{element} :00
-														</option>
-													);
-												}
-										  })}
-								</select>
-							</div>
-						</article>
-						<article className="col-12 col-md-6">
-							<div className="contenedor_amarillo">
-								<h5 className="mb-3">Servicios Adicionales</h5>
-								<div className="row justify-content-center">
-									<input
-										name="arbitro"
-										checked={arbitro}
-										onChange={e => handleChange(e)}
-										type="checkbox"
-										id="arbitro"
-									/>
-									<h6>Árbitro</h6>
-								</div>
-								<div className="row justify-content-center">
-									<input
-										name="polera"
-										checked={polera}
-										onChange={e => handleChange(e)}
-										type="checkbox"
-										id="polera"
-									/>
-									<h6>Camiseta</h6>
-								</div>
-								<div className="row justify-content-center">
-									<input
-										name="pelota"
-										checked={pelota}
-										onChange={e => handleChange(e)}
-										type="checkbox"
-										id="pelota"
-									/>
-									<h6>Balon</h6>
-								</div>
-							</div>
-						</article>
-					</div>
-					<p className="mt-4">
-						Haz click en reservar y te haremos llegar un correo con los detalles de tu reserva:
+				<div className="container py-5">
+					<h5 className="display-4 lead encabezado_pichanga">Reserva tu cancha</h5>
+					<p className="lead">
+						Selecciona la fecha, horario y si necesitas algún accesorio, puedes selecionarlo:
 					</p>
-					<div className="row my-3 mx-1 justify-content-center">
-						<button type="submit" className="btn btn-primary btn-lg">
-							Reservar
-						</button>
-					</div>
-				</form>
-				<div className="row my-2 mx-1 justify-content-center">
-					<img src={Cancha} alt="Small Court" />
+
+					<form onSubmit={handlerSubmit}>
+						<div className="row">
+							<div className="col-12 col-md-4">
+								<div className="contenedor_verde">
+									<h5 className="mb-3">Reserva tu Cancha</h5>
+									<div className="container">
+										<h5>Día:</h5>
+										<Datepicker
+											className="fecha"
+											selected={store.selectDate}
+											onChange={date => actions.setSelectDate(date)}
+											dateFormat="dd/MM/yyyy"
+											minDate={new Date()}
+										/>
+										<h5 className="mt-2">Hora:</h5>
+										<div className="row">
+											<div className="col-12">
+												<select
+													className="custom-select"
+													id="hour"
+													defaultValue="Seleccione Hora"
+													onChange={e => setHour(e.target.value)}>
+													<option key="-1" value="Seleccione Hora">
+														Selecione Hora
+													</option>
+													{store.horasReservadas[fecha]
+														? array24Horas.map((element, index) => {
+																if (
+																	element >= store.complejo["openHour"] &&
+																	element <= store.complejo["closeHour"] &&
+																	!store.horasReservadas[fecha].some(
+																		elemento => elemento == element
+																	)
+																) {
+																	return (
+																		<option key={index} value={element}>
+																			{element}
+																			:00
+																		</option>
+																	);
+																}
+														  })
+														: array24Horas.map((element, index) => {
+																if (
+																	element >= store.complejo["openHour"] &&
+																	element <= store.complejo["closeHour"]
+																) {
+																	return (
+																		<option key={index} value={element}>
+																			{element} :00
+																		</option>
+																	);
+																}
+														  })}
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div className="col-12 col-md-4">
+								<div className="contenedor_amarillo">
+									<h5 className="mb-3">Servicios Adicionales</h5>
+									<div className="container pt-6">
+										<div className="row">
+											<div className="col-3" />
+											<div className="col-6">
+												<div className="row">
+													<input
+														name="arbitro"
+														checked={arbitro}
+														onChange={e => handleChange(e)}
+														type="checkbox"
+														id="arbitro"
+													/>
+													<h6 className="ml-3">Árbitro</h6>
+												</div>
+												<div className="row">
+													<input
+														name="polera"
+														checked={polera}
+														onChange={e => handleChange(e)}
+														type="checkbox"
+														id="polera"
+													/>
+													<h6 className="ml-3">Camiseta</h6>
+												</div>
+												<div className="row">
+													<input
+														name="pelota"
+														checked={pelota}
+														onChange={e => handleChange(e)}
+														type="checkbox"
+														id="pelota"
+													/>
+													<h6 className="ml-3">Balon</h6>
+												</div>
+											</div>
+											<div className="col-3" />
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div className="col-12 col-md-4">
+								<div className="contenedor-azul bg-info">
+									<h5 className="mb-3">Costo Total</h5>
+									<hr />
+									<div className="container">
+										<div className="row">
+											<div className="col-6">
+												<h6 className="ml-3">Cancha</h6>
+											</div>
+											<div className="col-6">$20.000</div>
+										</div>
+										<div className="row">
+											<div className="col-6">
+												<h6 className="ml-3">Árbitro</h6>
+											</div>
+											<div className="col-6">{arbitro ? `$15.000` : `$0`}</div>
+										</div>
+										<div className="row">
+											<div className="col-6">
+												<h6 className="ml-3">Camiseta</h6>
+											</div>
+											<div className="col-6">{polera ? `$3.000` : `$0`}</div>
+										</div>
+										<div className="row">
+											<div className="col-6">
+												<h6 className="ml-3">Balon</h6>
+											</div>
+											<div className="col-6">{pelota ? `$2.000` : `$0`}</div>
+										</div>
+										<hr />
+										<div className="row">
+											<div className="col-6">
+												<h6 className="ml-3">Total</h6>
+											</div>
+											<div className="col-6">{`$${(polera ? 3 : 0) +
+												(pelota ? 2 : 0) +
+												(arbitro ? 15 : 0) +
+												20}.000`}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<p className="lead mt-4">
+							Haz click en reservar y te haremos llegar un correo con los detalles de tu reserva:
+						</p>
+						<div className="row my-3 mx-1 justify-content-center">
+							<button type="submit" className="btn btn-primary btn-lg">
+								Reservar
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</>
