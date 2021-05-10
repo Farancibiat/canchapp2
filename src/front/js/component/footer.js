@@ -6,7 +6,7 @@ import logo from "../../img/logo_navbar.png";
 export const Footer = () => {
 	return (
 		<>
-			<footer className="bg-warning text-white py-5 mb-0 pb-0">
+			<footer className="bg-warning page-footer text-white py-5 mb-0 pb-0">
 				<div className="container">
 					<div className="row">
 						<div className="col-md-3 text-white d-flex justify-content-center">
