@@ -142,6 +142,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						{
 							name: "Talca",
 							complex: ["-"]
+						},
+						{
+							name: "Curicó",
+							complex: [
+								{
+									name: "Los Vidales",
+									mail: "losvidales@gmail.com",
+									phone: "+56912341234",
+									rentPrice: 20000,
+									ballPrice: 3000,
+									refereePrice: 20000
+								}
+							]
 						}
 					]
 				},
@@ -388,7 +401,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								{
 									user_mail: mail,
 									user_name: data.name,
-									token: "https://3000-white-wildebeest-iz4rsk82.ws-us03.gitpod.io/recover/" + token
+									token: "https://3000-white-frog-i06mrmo4.ws-us03.gitpod.io/recover/" + token
 								},
 								"user_F3htLlSg7bVzumwkoOdNw"
 							);
