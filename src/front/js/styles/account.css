@@ -16,9 +16,9 @@
 
 .card-account{
     background: transparent;
-
     padding-top: 3rem;
     padding-bottom: 8rem;
+    height: 80vh;
 }
 .divider-text {
     position: relative;
