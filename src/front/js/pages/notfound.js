@@ -9,9 +9,9 @@ export const NotFound = () => {
 
 	return (
 		<div className="yellowBG content py-3">
-			<div className="row align-items-center">
+			<div className="nt1 row align-items-center">
 				<div className="col-3" />
-				<div className="col-4">
+				<div className="col-4 align-middle">
 					<h1 className="display-1 dGreenText mb-0">Error 404</h1>
 					<h2 className="display-4 lGreenText mt-0">¡Por poquiiito!</h2>
 
