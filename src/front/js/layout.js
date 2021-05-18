@@ -2,12 +2,17 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
+import { Account } from "./pages/account";
 import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
-import injectContext from "./store/appContext";
+import { Login } from "./pages/login";
+import { NotFound } from "./pages/notfound";
+import { Profile } from "./pages/profile";
+import { Recoverpass } from "./pages/recoverpass";
+import { Recover } from "./pages/recover";
+import { Reserve } from "./pages/reserve";
 
-import { Navbar } from "./component/navbar";
+import injectContext from "./store/appContext";
+import { NavigationBar } from "./component/navigationbar";
 import { Footer } from "./component/footer";
 
 //create your first component
@@ -17,28 +22,35 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="d-flex flex-column h-100">
-			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<Navbar />
-					<Switch>
-						<Route exact path="/">
-							<Home />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
-						<Route>
-							<h1>Not found!</h1>
-						</Route>
-					</Switch>
-					<Footer />
-				</ScrollToTop>
-			</BrowserRouter>
-		</div>
+		<BrowserRouter basename={basename}>
+			<ScrollToTop>
+				<NavigationBar />
+				<Switch>
+					<Route exact path="/account">
+						<Account />
+					</Route>
+					<Route exact path="/">
+						<Home />
+					</Route>
+					<Route exact path="/login">
+						<Login />
+					</Route>
+					<Route exact path="/recover">
+						<Recover />
+					</Route>
+					<Route exact path="/recover/:token">
+						<Recoverpass />
+					</Route>
+					<Route exact path="/reserve/:theId">
+						<Reserve />
+					</Route>
+					<Route>
+						<NotFound />
+					</Route>
+				</Switch>
+				<Footer />
+			</ScrollToTop>
+		</BrowserRouter>
 	);
 };
 

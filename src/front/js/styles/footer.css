@@ -1,0 +1,12 @@
+
+.p_footer{
+    font-size: 14px;
+    color: white;
+    display: flex;
+    align-items: center;
+
+}
+
+body{
+    margin: 0px;
+}
