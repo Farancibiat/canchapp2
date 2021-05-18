@@ -401,7 +401,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								{
 									user_mail: mail,
 									user_name: data.name,
-									token: "https://3000-white-frog-i06mrmo4.ws-us03.gitpod.io/recover/" + token
+									token: token
 								},
 								"user_F3htLlSg7bVzumwkoOdNw"
 							);
